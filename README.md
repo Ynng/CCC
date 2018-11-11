@@ -1,2 +1,2 @@
 # CCC
-Canadian Computer Contest
+Just for saving stuff I wrote.
