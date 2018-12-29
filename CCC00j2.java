@@ -17,17 +17,13 @@ public class CCC00j2 {
             for (int j = 0; j < s.length() / 2; j++) {
                 char a = s.charAt(j);
                 char b = s.charAt(s.length() - 1 - j);
-                if (a != b||a=='6'||a=='9') {
-                    if (!((a == '6' && b == '9') || (a == '9' && b == '6'))) {
-                        continue outerloop;
-                    }
-                }
-                // if((!((a=='6'&&b=='9')||(a=='9'&&b=='6')))&&((a!=b)&&(a!=6))){
-                // continue outerloop;
-                // }
+                if(b=='6')b='9';
+                if(b=='9')b='6';
+                if(a!=b)continue outerloop;
             }
-            // System.out.println(i);
             counter++;
+            // System.out.println(i);
+            
 
         }
         System.out.println(counter);
