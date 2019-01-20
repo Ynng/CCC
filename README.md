@@ -1,9 +1,3 @@
-# Canadian Computer Contest
+# Competitive Programming
 
-For syncing my progress on the CCC questions across devices.
-
-I did not spend any time polishing any of these solutions, so they might be unoptimized.
-
-I use the judge on DMOJ to check my solutions.
-
-The solutions that don't pass all the test cases are in the "WIP" folder. I'm still learning about Computer Science and is on my way to solve them. 
+For syncing my progress on the Canadian Computer Contest questions and other things from DMOJ across devices.
