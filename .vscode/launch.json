@@ -1,6 +1,11 @@
 {
     "configurations": [
-        
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - NCCC6s4",
+            "request": "launch",
+            "mainClass": "NCCC6s4"
+        },
         {
             "name": "(gdb) Launch",
             "type": "cppdbg",
