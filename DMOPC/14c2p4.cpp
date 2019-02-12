@@ -1,35 +1,24 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 int main()
 {
-    int n, q, temp, treeTotalMass = 0;
-    vector<int> trees, queryA, queryB;
+    int n, q, tempA, tempB, trees[1000005], m[1000005];
     scanf("%d", &n);
-    for (int i = 0; i < n; i++)
+    trees[0] = 0;
+    for (int i = 1; i <= n; i++)
     {
-        scanf("%d", &temp);
-        treeTotalMass += temp;
-        trees.push_back(treeTotalMass);
+        scanf("%d", &tempA);
+        trees[i] = trees[i - 1] + tempA;
     }
     scanf("%d", &q);
     for (int i = 0; i < q; i++)
     {
-        scanf("%d ", &temp);
-        queryA.push_back(temp);
-        scanf("%d", &temp);
-        queryB.push_back(temp);
+        scanf("%d %d", &tempA, &tempB);
+        m[i] = trees[tempB + 1] - trees[tempA];
     }
     for (int i = 0; i < q; i++)
     {
-        if (queryA[i] == 0)
-        {
-            printf("%d\n", trees[queryB[i]]);
-        }
-        else
-        {
-            printf("%d\n", trees[queryB[i]] - trees[queryA[i] - 1]);
-        }
+        printf("%d\n", m[i]);
     }
     return 0;
 }
