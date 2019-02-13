@@ -5,6 +5,7 @@
         "ostream": "cpp",
         "map": "cpp",
         "utility": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "xtree": "cpp"
     }
 }
