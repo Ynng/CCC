@@ -23,7 +23,7 @@ int main()
             {
                 output = output + std::to_string(counter) + ' ' + oldChar + ' ';
                 oldChar = input[j];
-                counter = 11;
+                counter = 1;
             }
         }
         output = output + std::to_string(counter) + ' ' + oldChar + ' ';
