@@ -1,3 +1,3 @@
-# Practise
+# Practice
 
-For syncing my progress of practises across multiple devices
+For syncing my progress of practices across multiple devices
