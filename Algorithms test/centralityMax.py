@@ -3,14 +3,27 @@
 # from a node to all the other nodes it can reach
 #
 
+
 def centrality_max(G, v):
     # your code here
-    
-    return 0
+    distance = {v: 0}
+    maxdistance = 0
+    query = [v]
+    while len(query) > 0:
+        for neighbor in G[query[0]]:
+            if neighbor not in distance:
+                query.append(neighbor)
+                distance[neighbor] = distance[query[0]]+1
+                if distance[neighbor] > maxdistance:
+                    maxdistance = distance[neighbor]
+        query.pop(0)
+    return maxdistance
 
 #################
 # Testing code
 #
+
+
 def make_link(G, node1, node2):
     if node1 not in G:
         G[node1] = {}
@@ -20,11 +33,13 @@ def make_link(G, node1, node2):
     (G[node2])[node1] = 1
     return G
 
+
 def test():
-    chain = ((1,2), (2,3), (3,4), (4,5), (5,6))
+    chain = ((1, 2), (2, 3), (3, 4), (4, 5), (5, 6))
     G = {}
     for n1, n2 in chain:
         make_link(G, n1, n2)
+
     assert centrality_max(G, 1) == 5
     assert centrality_max(G, 3) == 3
     tree = ((1, 2), (1, 3),
@@ -37,5 +52,6 @@ def test():
         make_link(G, n1, n2)
     assert centrality_max(G, 1) == 3
     assert centrality_max(G, 11) == 6
+
 
 test()
