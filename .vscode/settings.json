@@ -46,5 +46,8 @@
         "xutility": "cpp",
         "sstream": "cpp"
     },
-    "python.linting.pylintEnabled": true
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "C:\\Users\\wenqi\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "python.linting.flake8Enabled": false
 }

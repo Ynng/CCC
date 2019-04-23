@@ -98,20 +98,27 @@ def test_create_rooted_spanning_tree():
 ###########
 
 
-def post_order(S, root, output):
+def post_order(S, root):
     # return mapping between nodes of S and the post-order value
     # of that node
     marked = {root:1}
     openlist = [root]
     counter = 1
+    
     # your code here
     while len(openlist) > 0:
         for neighbor in S[openlist[0]]:
             if neighbor not in marked:
+                counter+=1
+                marked[neighbor] = counter
+            openlist.insert()
+            
+
+            if neighbor not in marked:
                 if S[openlist[0]][neighbor] == 'green':
-                    counter+=1
-                    marked[neighbor] = counter
-                    openlist.append(neighbor)
+                    if len(openlist>1):
+                        if(openlist[1]==neighbor):
+                            continue
         openlist.pop(0)
     return marked
 
@@ -121,7 +128,6 @@ def post_order(S, root, output):
 # accept any valid result.
 # feel free to edit the test to
 # match the solution your program produces
-
 
 def test_post_order():
     S = {'a': {'c': 'green', 'b': 'green'},
