@@ -101,26 +101,27 @@ def test_create_rooted_spanning_tree():
 def post_order(S, root):
     # return mapping between nodes of S and the post-order value
     # of that node
-    marked = {root:1}
+    output = {root: 1}
+    marked = {root: 1}
     openlist = [root]
-    counter = 1
-    
+    counter = 0
+    pendingList = []
+
     # your code here
     while len(openlist) > 0:
         for neighbor in S[openlist[0]]:
-            if neighbor not in marked:
-                counter+=1
-                marked[neighbor] = counter
-            openlist.insert()
-            
-
-            if neighbor not in marked:
-                if S[openlist[0]][neighbor] == 'green':
-                    if len(openlist>1):
-                        if(openlist[1]==neighbor):
-                            continue
+            if S[openlist[0]][neighbor] == 'green':
+                if neighbor not in marked:
+                    marked[neighbor] = 1
+                    pendingList.append(neighbor)
+        counter += 1
+        output[openlist[0]] = counter
         openlist.pop(0)
-    return marked
+        openlist = pendingList+openlist
+        pendingList.clear()
+    for i in output:
+        output[i]=1+counter-output[i]
+    return output
 
 # This is just one possible solution
 # There are other ways to create a
@@ -128,6 +129,7 @@ def post_order(S, root):
 # accept any valid result.
 # feel free to edit the test to
 # match the solution your program produces
+
 
 def test_post_order():
     S = {'a': {'c': 'green', 'b': 'green'},
@@ -139,7 +141,6 @@ def test_post_order():
          'g': {'e': 'green', 'f': 'red'}
          }
     po = post_order(S, 'a')
-    print (po)
     assert po == {'a': 7, 'b': 1, 'c': 6, 'd': 5, 'e': 4, 'f': 2, 'g': 3}
 
 
