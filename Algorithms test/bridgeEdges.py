@@ -102,7 +102,7 @@ def post_order(S, root):
     # return mapping between nodes of S and the post-order value
     # of that node
     output = {root: 1}
-    marked = {root: 1}
+    marked = {root}
     openlist = [root]
     counter = 0
     pendingList = []
@@ -112,7 +112,7 @@ def post_order(S, root):
         for neighbor in S[openlist[0]]:
             if S[openlist[0]][neighbor] == 'green':
                 if neighbor not in marked:
-                    marked[neighbor] = 1
+                    marked.add(neighbor)
                     pendingList.append(neighbor)
         counter += 1
         output[openlist[0]] = counter
@@ -142,17 +142,30 @@ def test_post_order():
          }
     po = post_order(S, 'a')
     assert po == {'a': 7, 'b': 1, 'c': 6, 'd': 5, 'e': 4, 'f': 2, 'g': 3}
-
-
-test_post_order()
 ##############
 
 
 def number_of_descendants(S, root):
     # return mapping between nodes of S and the number of descendants
     # of that node
-    pass
+    # return mapping between nodes of S and the post-order value
+    # of that node
+    output = {}
+    marked = {root}
 
+    number_of_descendants_rec(S, root, output, marked)
+    return output
+    # your code here
+
+def number_of_descendants_rec(S, currentNode, output, marked):
+    desCount = 1
+    for neighbor in S[currentNode]:
+        if neighbor not in marked:
+            if S[currentNode][neighbor] == 'green':
+                marked.add(neighbor)
+                desCount+=number_of_descendants_rec(S, neighbor, output, marked)
+    output[currentNode] = desCount
+    return desCount
 
 def test_number_of_descendants():
     S = {'a': {'c': 'green', 'b': 'green'},
@@ -164,6 +177,7 @@ def test_number_of_descendants():
          'g': {'e': 'green', 'f': 'red'}
          }
     nd = number_of_descendants(S, 'a')
+    print(nd)
     assert nd == {'a': 7, 'b': 1, 'c': 5, 'd': 4, 'e': 3, 'f': 1, 'g': 1}
 
 ###############
