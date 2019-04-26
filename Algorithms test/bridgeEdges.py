@@ -148,8 +148,6 @@ def test_post_order():
 def number_of_descendants(S, root):
     # return mapping between nodes of S and the number of descendants
     # of that node
-    # return mapping between nodes of S and the post-order value
-    # of that node
     output = {}
     marked = {root}
 
@@ -188,8 +186,13 @@ def lowest_post_order(S, root, po):
     # to the lowest post order value
     # below that node
     # (and you're allowed to follow 1 red edge)
+    output = {}
+    lowest_post_order(S,root,po)
     pass
 
+def lowest_post_order_rec(S, currentNode, po):
+
+return 0
 
 def test_lowest_post_order():
     S = {'a': {'c': 'green', 'b': 'green'},
@@ -204,7 +207,7 @@ def test_lowest_post_order():
     l = lowest_post_order(S, 'a', po)
     assert l == {'a': 1, 'b': 1, 'c': 1, 'd': 1, 'e': 2, 'f': 2, 'g': 2}
 
-
+def test_lowest_post_order()
 ################
 
 def highest_post_order(S, root, po):
