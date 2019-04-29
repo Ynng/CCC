@@ -192,16 +192,16 @@ def lowest_post_order(S, root, po):
     return output
 
 def lowest_post_order_rec(S, po, output, marked, currentNode):
-    lowestPO = po[currentNode]
+    temp = lowestPO = po[currentNode]
     for neighbor in S[currentNode]:
-        if neighbor not in marked:
-            if S[currentNode][neighbor]=='green':
+        if S[currentNode][neighbor]=='green':
+            if neighbor not in marked:
                 marked.add(neighbor)
                 temp = lowest_post_order_rec(S,po,output,marked,neighbor)
-            else:
-                temp = po[neighbor]
-            if temp<lowestPO:
-                lowestPO=temp
+        else:
+            temp = po[neighbor]
+        if temp<lowestPO:
+            lowestPO=temp
     output[currentNode]=lowestPO
     return lowestPO
 
@@ -226,7 +226,24 @@ def highest_post_order(S, root, po):
     # to the highest post order value
     # below that node
     # (and you're allowed to follow 1 red edge)
-    pass
+    marked = {root}
+    output = {}
+    highest_post_order_rec(S, po, output, marked, root)
+    return output
+
+def highest_post_order_rec(S, po, output, marked, currentNode):
+    temp = highestPO = po[currentNode]
+    for neighbor in S[currentNode]:
+        if S[currentNode][neighbor]=='green':
+            if neighbor not in marked:
+                marked.add(neighbor)
+                temp = highest_post_order_rec(S,po,output,marked,neighbor)
+        else:
+            temp = po[neighbor]
+        if temp>highestPO:
+            highestPO=temp
+    output[currentNode]=highestPO
+    return highestPO
 
 
 def test_highest_post_order():
@@ -240,6 +257,7 @@ def test_highest_post_order():
          }
     po = post_order(S, 'a')
     h = highest_post_order(S, 'a', po)
+    print(h)
     assert h == {'a': 7, 'b': 5, 'c': 6, 'd': 5, 'e': 4, 'f': 3, 'g': 3}
 
 #################
