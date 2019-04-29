@@ -105,10 +105,10 @@ def post_order(S, root):
     marked = {root}
     openlist = [root]
     counter = 0
-    pendingList = []
 
     # your code here
     while len(openlist) > 0:
+        pendingList = []
         node=openlist.pop()
         for neighbor in S[node]:
             if S[node][neighbor] == 'green':
@@ -118,8 +118,7 @@ def post_order(S, root):
         counter += 1
         output[node] = counter
         openlist = pendingList+openlist
-        while len(pendingList)>0:
-            pendingList.pop(0)
+        del pendingList
     for i in output:
         output[i]=1+counter-output[i]
     return output
