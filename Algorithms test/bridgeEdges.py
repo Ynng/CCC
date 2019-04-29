@@ -186,13 +186,24 @@ def lowest_post_order(S, root, po):
     # to the lowest post order value
     # below that node
     # (and you're allowed to follow 1 red edge)
+    marked = {root}
     output = {}
-    lowest_post_order(S,root,po)
-    pass
+    lowest_post_order_rec(S, po, output, marked, root)
+    return output
 
-def lowest_post_order_rec(S, currentNode, po):
-
-return 0
+def lowest_post_order_rec(S, po, output, marked, currentNode):
+    lowestPO = po[currentNode]
+    for neighbor in S[currentNode]:
+        if neighbor not in marked:
+            if S[currentNode][neighbor]=='green':
+                marked.add(neighbor)
+                temp = lowest_post_order_rec(S,po,output,marked,neighbor)
+            else:
+                temp = po[neighbor]
+            if temp<lowestPO:
+                lowestPO=temp
+    output[currentNode]=lowestPO
+    return lowestPO
 
 def test_lowest_post_order():
     S = {'a': {'c': 'green', 'b': 'green'},
@@ -205,9 +216,9 @@ def test_lowest_post_order():
          }
     po = post_order(S, 'a')
     l = lowest_post_order(S, 'a', po)
+    print(l)
     assert l == {'a': 1, 'b': 1, 'c': 1, 'd': 1, 'e': 2, 'f': 2, 'g': 2}
 
-def test_lowest_post_order()
 ################
 
 def highest_post_order(S, root, po):
