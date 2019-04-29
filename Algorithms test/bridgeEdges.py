@@ -48,24 +48,24 @@ def create_rooted_spanning_tree(G, root):
     openlist = [root]
     # your code here
     while len(openlist) > 0:
-        for neighbor in G[openlist[0]]:
+        node=openlist.pop()
+        for neighbor in G[node]:
             if neighbor not in marked:
                 marked.add(neighbor)
                 openlist.append(neighbor)
                 if neighbor not in S:
                     S[neighbor] = {}
-                S[neighbor][openlist[0]] = 'green'
-                if openlist[0] not in S:
-                    S[openlist[0]] = {}
-                S[openlist[0]][neighbor] = 'green'
-            elif neighbor not in S[openlist[0]]:
+                S[neighbor][node] = 'green'
+                if node not in S:
+                    S[node] = {}
+                S[node][neighbor] = 'green'
+            elif neighbor not in S[node]:
                 if neighbor not in S:
                     S[neighbor] = {}
-                S[neighbor][openlist[0]] = 'red'
-                if openlist[0] not in S:
-                    S[openlist[0]] = {}
-                S[openlist[0]][neighbor] = 'red'
-        openlist.pop(0)
+                S[neighbor][node] = 'red'
+                if node not in S:
+                    S[node] = {}
+                S[node][neighbor] = 'red'
     return S
 
 # This is just one possible solution
@@ -109,14 +109,14 @@ def post_order(S, root):
 
     # your code here
     while len(openlist) > 0:
-        for neighbor in S[openlist[0]]:
-            if S[openlist[0]][neighbor] == 'green':
+        node=openlist.pop()
+        for neighbor in S[node]:
+            if S[node][neighbor] == 'green':
                 if neighbor not in marked:
                     marked.add(neighbor)
                     pendingList.append(neighbor)
         counter += 1
-        output[openlist[0]] = counter
-        openlist.pop(0)
+        output[node] = counter
         openlist = pendingList+openlist
         while len(pendingList)>0:
             pendingList.pop(0)
