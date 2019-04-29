@@ -267,8 +267,26 @@ def bridge_edges(G, root):
     # use the four functions above
     # and then determine which edges in G are bridge edges
     # return them as a list of tuples ie: [(n1, n2), (n4, n5)]
-    pass
+    S=create_rooted_spanning_tree(G,root)
+    po=post_order(S,root)
+    nd=number_of_descendants(S,root)
+    l=lowest_post_order(S,root,po)
+    h=highest_post_order(S,root,po)
+    marked={root}
+    output=[]
+    bridge_edges_rec(S,po,nd,l,h,marked,output,root)
+    #h<po and l>po-nd
+    return output
 
+def bridge_edges_rec(S,po,nd,l,h,marked,output,currentNode):
+    for neighbor in S[currentNode]:
+        if neighbor not in marked:
+            if S[currentNode][neighbor]=='green':
+                marked.add(neighbor)
+                if(h[neighbor]<=po[neighbor] and l[neighbor]>po[neighbor]-nd[neighbor]):
+                    output.append((currentNode,neighbor))
+                bridge_edges_rec(S,po,nd,l,h,marked,output,neighbor)
+    return 0
 
 def test_bridge_edges():
     G = {'a': {'c': 1, 'b': 1},
@@ -280,4 +298,7 @@ def test_bridge_edges():
          'g': {'e': 1, 'f': 1}
          }
     bridges = bridge_edges(G, 'a')
+    print(bridges)
     assert bridges == [('d', 'e')]
+
+test_bridge_edges()
