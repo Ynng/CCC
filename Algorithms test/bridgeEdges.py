@@ -118,7 +118,8 @@ def post_order(S, root):
         output[openlist[0]] = counter
         openlist.pop(0)
         openlist = pendingList+openlist
-        pendingList.clear()
+        while len(pendingList)>0:
+            pendingList.pop(0)
     for i in output:
         output[i]=1+counter-output[i]
     return output
