@@ -7,17 +7,14 @@
 def centrality_max(G, v):
     # your code here
     distance = {v: 0}
-    maxdistance = 0
     query = [v]
     while len(query) > 0:
-        for neighbor in G[query[0]]:
+        node = query.pop()
+        for neighbor in G[node]:
             if neighbor not in distance:
                 query.append(neighbor)
-                distance[neighbor] = distance[query[0]]+1
-                if distance[neighbor] > maxdistance:
-                    maxdistance = distance[neighbor]
-        query.pop(0)
-    return maxdistance
+                distance[neighbor] = distance[node]+1
+    return max(distance.values())
 
 #################
 # Testing code
