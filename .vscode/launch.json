@@ -1,6 +1,13 @@
 {
     "configurations": [
         {
+            "type": "java",
+            "name": "CodeLens (Launch) - Temp",
+            "request": "launch",
+            "mainClass": "Temp",
+            "projectName": "CCC_b1956b04"
+        },
+        {
             "name": "Python: Terminal (integrated)",
             "type": "python",
             "request": "launch",
