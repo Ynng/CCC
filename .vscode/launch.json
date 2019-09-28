@@ -2,10 +2,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - Temp",
+            "name": "Debug (Launch) - Current File",
             "request": "launch",
-            "mainClass": "Temp",
-            "projectName": "CCC_b1956b04"
+            "mainClass": "${file}"
         },
         {
             "name": "Python: Terminal (integrated)",
@@ -20,19 +19,6 @@
             "request": "launch",
             "program": "${file}",
             "console": "externalTerminal"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - Test",
-            "request": "launch",
-            "mainClass": "Test",
-            "projectName": "CCC_b1956b04"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - NCCC6s4",
-            "request": "launch",
-            "mainClass": "NCCC6s4"
         },
         {
             "name": "(gdb) Launch",
@@ -54,13 +40,6 @@
                 }
             ],
             "preLaunchTask": "build file"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - CCC00j2",
-            "request": "launch",
-            "mainClass": "CCC00j2",
-            "console": "integratedTerminal"
         }
     ]
 }
