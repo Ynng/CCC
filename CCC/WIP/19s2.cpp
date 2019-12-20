@@ -4,7 +4,7 @@
 using namespace std;
 int main()
 {
-    int t, n[1005], largest, limit, sqrtLimit, division;
+    int t, n[1005], largest, limit, sqrtLimit;
     bool prime[2000005];
     largest = -1;
     scanf("%d", &t);
