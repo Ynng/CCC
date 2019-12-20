@@ -20,13 +20,15 @@ int main()
     sqrtLimit = sqrt(limit);
     for (int i = 2; i <= sqrtLimit; i++)
     {
-        if(!prime[i]){
-            for(int j = 2;i*j<=limit;j++){
-                prime[i*j]=true;
+        if (!prime[i])
+        {
+            for (int j = 2; i * j <= limit; j++)
+            {
+                prime[i * j] = true;
             }
         }
     }
-    prime[1]=true;
+    prime[1] = true;
     for (int i = 1; i <= t; i++)
     {
         for (int j = 1; j <= n[i]; j++)
