@@ -1,13 +1,10 @@
 #include <iostream>
 #include <cmath>
-#include <vector>
-#include <algorithm>
 #include <cstdio>
 using namespace std;
 int main()
 {
-    int t, n[1005], tempA, tempB, largest, limit, division;
-    vector<int> primeVector;
+    int t, n[1005], largest, limit, sqrtLimit, division;
     bool prime[2000005];
     largest = -1;
     scanf("%d", &t);
@@ -19,28 +16,22 @@ int main()
     }
 
     //finding the primes
-    for (int i = 2; i <= largest * 2 + 1; i++)
+    limit = largest * 2 + 1;
+    sqrtLimit = sqrt(limit);
+    for (int i = 2; i <= sqrtLimit; i++)
     {
-        limit = pow(i, 0.5) + 1;
-        division = -1;
-        for (int j = 2; j <= limit; j++)
-        {
-            if (i % j == 0)
-            {
-                division = j;
-                break;
+        if(!prime[i]){
+            for(int j = 2;i*j<=limit;j++){
+                prime[i*j]=true;
             }
         }
-        if (division == -1)
-        {
-            prime[i] = true;
-        }
     }
+    prime[1]=true;
     for (int i = 1; i <= t; i++)
     {
         for (int j = 1; j <= n[i]; j++)
         {
-            if (prime[j] && prime[n[i] * 2 - j])
+            if ((!prime[j]) && (!prime[n[i] * 2 - j]))
             {
                 printf("%d %d\n", j, n[i] * 2 - j);
                 break;
