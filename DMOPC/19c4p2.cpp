@@ -10,11 +10,21 @@ int larger(int a, int b)
 {
     return a > b ? a : b;
 }
+int getDistance(int rTarget, int cTarget, int rMove, int cMove, int rObs, int cObs)
+{
+    int output = 0;
+    if ((rTarget == rMove && rMove == rObs && smaller(cMove, cTarget) < cObs && cObs < larger(cMove, cTarget)) || (cTarget == cMove && cMove == cObs && smaller(rMove, rTarget) < rObs && rObs < larger(rMove, rTarget)))
+    {
+        output += 2;
+    }
+    output += abs(rTarget - rMove) + abs(cTarget - cMove);
+    return output;
+}
 int main()
 {
     int n, rs, cs, re, ce;
     int grid[17][17];
-    int rTemp, cTemp;
+    int rTemp, cTemp, rTempA, cTempA, rTempB, cTempB, lengthA, lengthB;
 
     int rTarget, cTarget, rMove, cMove, rObs, cObs;
     int output = 0;
@@ -44,7 +54,7 @@ int main()
         rTemp = re - rObs;
         cTemp = ce - cObs;
         //finding the target of the next step
-        if (abs(rTemp) >= abs(cTemp))
+        if (abs(rTemp) > abs(cTemp))
         {
             //move in r
             if (rTemp > 0)
@@ -59,7 +69,7 @@ int main()
                 cTarget = cObs;
             }
         }
-        else
+        else if (abs(rTemp) < abs(cTemp))
         {
             //move in c
             if (cTemp > 0)
@@ -74,14 +84,46 @@ int main()
                 cTarget = cObs - 1;
             }
         }
-        //check if the path is obstructed
-        if (
-            (rTarget == rMove && rMove == rObs && smaller(rMove, rTarget) < rObs && rObs < larger(rMove, rTarget))
-            || (cTarget == cMove && cMove == cObs && smaller(cMove, cTarget) < cObs && cObs < larger(cMove, cTarget)))
+        else
         {
-            output += 2;
+            //if they are equal
+            //move in r
+            if (rTemp > 0)
+            {
+                //move down
+                rTempA = rObs + 1;
+                cTempA = cObs;
+            }
+            else
+            {
+                rTempA = rObs - 1;
+                cTempA = cObs;
+            }
+            //move in c
+            if (cTemp > 0)
+            {
+                //move right
+                rTempB = rObs;
+                cTempB = cObs + 1;
+            }
+            else
+            {
+                rTempB = rObs;
+                cTempB = cObs - 1;
+            }
+            if (getDistance(rTempA, cTempA, rMove, cMove, rObs, cObs) < getDistance(rTempB, cTempB, rMove, cMove, rObs, cObs))
+            { 
+                rTarget = rTempA;
+                cTarget = cTempA;
+            }
+            else
+            {
+                rTarget = rTempB;
+                cTarget = cTempB;
+            }
         }
-        output += abs(rTarget - rMove) + abs(cTarget - cMove);
+        //check if the path is obstructed
+        output += getDistance(rTarget, cTarget, rMove, cMove, rObs, cObs);
         output += 1;
         //the marble moves over
         rMove = rObs;
