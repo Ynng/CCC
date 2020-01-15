@@ -1,40 +1,51 @@
 #include <map>
 #include <vector>
-
+#include <string.h>
 bool pho[100005] = {false};
 bool visited[100005] = {false};
 bool removed[100005] = {false};
-int height[100005] = {0};
+int furthestNode, furthestDist = 0;
 
 std::map<int, std::vector<int>> graph;
-int n, m, tempA, tempB, edgeCount, startNode;
+int n, m, edgeCount, startNode;
 
-int recursion(int cur)
+int recursion(int cur, int distance)
 {
-    printf("rec %d %d\n", cur, graph[cur].size());
+    int temp, tempOutput;
+
+    // printf("rec %d\n", cur);
     visited[cur] = true;
-    tempB = -1;
-    if (graph[cur].size() != 1)
+
+    if (pho[cur] && distance > furthestDist)
     {
+        furthestDist = distance;
+        furthestNode = cur;
+    }
+
+    if (graph[cur].size() != 1 || distance == 0)
+    {
+        if (pho[cur])
+            tempOutput = 0;
+        else
+            tempOutput = -1;
         for (int i = 0; i < graph[cur].size(); i++)
         {
-            if (!visited[graph[cur][i]] && !removed[graph[cur][i]])
+            int neighbor = graph[cur][i];
+            if (!visited[neighbor] && !removed[neighbor])
             {
-                int neighbor = graph[cur][i];
-                tempA = recursion(graph[cur][i]);
-                if (tempA == -1)
+                temp = recursion(neighbor, distance + 1);
+                if (temp == -1)
                 {
-                    removed[graph[cur][i]] = true;
-                    edgeCount--;
+                    removed[neighbor] = true;
+                    edgeCount -= 2;
                 }
                 else
                 {
-                    if(height[cur] < height[graph[cur][i]]+1)height[cur]=height[graph[cur][i]]+1;
-                    tempB = 0;
+                    tempOutput = 0;
                 }
             }
         }
-        return tempB;
+        return tempOutput;
     }
     else
     {
@@ -46,7 +57,7 @@ int recursion(int cur)
 }
 int main()
 {
-
+    int tempA, tempB;
     scanf("%d %d", &n, &m);
     for (int i = 0; i < m; i++)
     {
@@ -54,7 +65,7 @@ int main()
         pho[tempA] = true;
     }
     startNode = tempA;
-    edgeCount = n - 1;
+    edgeCount = (n - 1) * 2;
 
     for (int i = 0; i < n - 1; i++)
     {
@@ -63,21 +74,33 @@ int main()
         graph[tempB].push_back(tempA);
     }
 
-    printf("\n stuff: ");
+    // printf("\n stuff: ");
 
-    for (int i = 0; i < graph[2].size(); i++)
-    {
-        printf("%d ", graph[2][i]);
-    }
+    // for (int i = 0; i < graph[5].size(); i++)
+    // {
+    //     printf("%d ", graph[5][i]);
+    // }
 
-    recursion(startNode);
+    recursion(startNode, 0);
+    memset(visited, 0, sizeof(visited));
+    // printf("edgecount: %d\n", edgeCount);
+    recursion(furthestNode, 0);
+    // printf("edgecount: %d\n", edgeCount);
+    // printf("furthestDist: %d\n", furthestDist);
 
-    printf("\n height ");
+    // printf("%d", edgeCount);
 
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", height[i]);
-    }
+    // printf("\nA:%d B:%d", heightA, heightB);
+
+    // printf("\nedgeCount:%d ", edgeCount);
+    printf("%d", edgeCount - furthestDist);
+
+    // printf("\n height ");
+
+    // for (int i = 0; i < n; i++)
+    // {
+    //     printf("\n%d: %d %d %d", i, height[i], removed[i], childCount[i]);
+    // }
 
     return 0;
 }
