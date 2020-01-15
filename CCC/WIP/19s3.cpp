@@ -115,6 +115,69 @@ bool checkB()
         return false;
 }
 
+void solveC()
+{
+    if (input[1][1] == 1000005)
+    {
+        if (input[1][0] != 1000005)
+            input[1][1] = input[1][0];
+        else if (input[1][2] != 1000005)
+            input[1][1] = input[1][2];
+        else if (input[0][1] != 1000005)
+            input[1][1] = input[0][1];
+        else if (input[2][1] != 1000005)
+            input[1][1] = input[2][1];
+        input[1][3]--;
+        input[3][1]--;
+    }
+    else
+    {
+        input[0][1] = input[1][1];
+        input[0][3]--;
+        input[1][3]--;
+    }
+}
+
+bool checkC()
+{
+    int count = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        if (input[3][i] == 2)
+        {
+            count++;
+        }
+        if (input[3][i] == 2)
+        {
+            count++;
+        }
+    }
+    if (count == 6)
+        return true;
+    else
+        return false;
+}
+
+bool checkD()
+{
+    int countA = 0, countB = 0, conutC = 0; countD = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        if (input[3][i] == 0)
+        {
+            count++;
+        }
+        if (input[3][i] == 2)
+        {
+            count++;
+        }
+    }
+    if (count == 6)
+        return true;
+    else
+        return false;
+}
+
 int main()
 {
     string temp;
@@ -152,6 +215,24 @@ int main()
     if (checkB())
     {
         solveB();
+        while (checkA())
+        {
+            solveA();
+        }
+    }
+
+    if (checkC())
+    {
+        solveC();
+        while (checkA())
+        {
+            solveA();
+        }
+    }
+
+    if (checkD())
+    {
+        solveD();
         while (checkA())
         {
             solveA();
