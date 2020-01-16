@@ -1,6 +1,11 @@
 {
     "configurations": [
-    
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - CCC00j2",
+            "request": "launch",
+            "mainClass": "CCC00j2"
+        },
         {
             "type": "java",
             "name": "Debug (Launch) - Current File",
