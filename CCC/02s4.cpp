@@ -56,6 +56,7 @@ int main()
   // {
   //     printf("Total Time: %d\n", dp[i][0]);
   // }
+  
 
   printf("Total Time: %d\n", dp[q][0]);
 

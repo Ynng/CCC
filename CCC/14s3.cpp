@@ -15,7 +15,6 @@ int main()
     scanf("%d", &n);
     for (int j = 1; j <= n; j++)
     {
-
       scanf("%d", &temp);
       cars.push_back(temp);
     }
