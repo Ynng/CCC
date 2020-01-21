@@ -61,7 +61,8 @@
         "random": "cpp",
         "string_view": "cpp",
         "fstream": "cpp",
-        "cctype": "cpp"
+        "cctype": "cpp",
+        "set": "cpp"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
