@@ -7,9 +7,32 @@
             "label": "build file",
             "type": "shell",
             "command": "g++",
+            //https://codeforces.com/blog/entry/15547
             "args": [
                 "-g",
-                "${file}"
+                "${file}",
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-std=c++11",
+                "-O2",
+                "-Wshadow",
+                "-Wformat=2",
+                "-Wfloat-equal",
+                "-Wconversion",
+                "-Wlogical-op",
+                "-Wshift-overflow=2",
+                "-Wduplicated-cond",
+                "-Wcast-qual",
+                "-Wcast-align",
+                "-D_GLIBCXX_DEBUG",
+                "-D_GLIBCXX_DEBUG_PEDANTIC",
+                "-D_FORTIFY_SOURCE=2",
+                // comment the below two lines out on mingw, enable them on mingw-64
+                // "-fsanitize=address",
+                // "-fsanitize=undefined",
+                "-fno-sanitize-recover",
+                "-fstack-protector"
             ],
             "group": {
                 "kind": "build",
