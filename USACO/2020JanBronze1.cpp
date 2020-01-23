@@ -10,7 +10,7 @@ int main()
   int n, k, charCount;
   char tmp[20];
   std::string tmpStr, output;
-
+  
   fp = fopen("word.in", "r");
 
   fscanf(fp, "%d %d", &n, &k);

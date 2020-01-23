@@ -62,7 +62,11 @@
         "string_view": "cpp",
         "fstream": "cpp",
         "cctype": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "list": "cpp",
+        "concepts": "cpp",
+        "queue": "cpp",
+        "xhash": "cpp"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
