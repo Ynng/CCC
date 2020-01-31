@@ -4,7 +4,7 @@
 using namespace std;
 int n;
 long long complexity = 0;
-map<int, long long> dp;
+long long dp[10000000] = {0};
 
 long long node(int weight)
 {
@@ -15,14 +15,14 @@ long long node(int weight)
 	{
 		//nodeWeight = (weight - (weight%i)) / i;
 		nodeWeight = weight / i;
-		if (dp.count(nodeWeight))
+		if (nodeWeight<10000000 && dp[nodeWeight])
 		{
 			d += dp[nodeWeight];
 		}
 		else
 		{
 			temp = node(nodeWeight);
-			dp[nodeWeight] = temp;
+			if(nodeWeight<10000000)dp[nodeWeight] = temp;
 			d += temp;
 		}
 		complexity++;
@@ -42,7 +42,7 @@ int main()
 	}
 	// dp[1] = 1;
 	// dp[2] = 1;
-	// for (int i = 3; i <= n; i++)
+	// for (int i = 3; i<=n; i++)
 	// {
 	// 	dp[i] = 0;
 	// 	for (int j = 2; j <= i / 2; j++)
@@ -57,6 +57,6 @@ int main()
 	// 	if (dp[i] != 0)
 	// 		printf("\n%d %lld", i, dp[i]);
 	// }
-	printf("\nComplexity %lld", complexity);
+	// printf("\nComplexity %lld", complexity);
 	return 0;
 }
