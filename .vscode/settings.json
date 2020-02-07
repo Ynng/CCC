@@ -72,4 +72,5 @@
     "python.linting.enabled": true,
     "python.pythonPath": "C:\\Program Files\\Python37\\python.exe",
     "python.linting.flake8Enabled": false,
+    "competitive-programming-helper.firstTime": false,
 }
