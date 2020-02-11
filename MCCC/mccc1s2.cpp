@@ -5,10 +5,22 @@
 using namespace std;
 
 int grid[2005][2005];
+int n;
 vector<int> output;
+void printGraph(){
+  for (int i = 0; i <= n; i++)
+  {
+    for (int j = 0; j <= n; j++)
+    {
+      printf("%d ", grid[i][j]);
+    }
+    printf("\n");
+  }
+}
+
 int main()
 {
-  int n, maxRow, maxCol, maxRCount, maxCCount;
+  int maxRow, maxCol, maxRCount, maxCCount;
   scanf("%d", &n);
   for (int i = 1; i <= n; i++)
   {
@@ -20,46 +32,49 @@ int main()
     }
   }
 
-  while(true){
-    maxRCount = maxCCount = (int)(ceil(n/2.0)-0.5);
-    maxRow = maxCol = -1;
-    for (int i = 1; i <= n; i++)
-    {
-      if(grid[i][0] > maxRCount){
-        maxRCount=grid[i][0];
-        maxRow = i;
-      }
-      if(grid[0][i] > maxCCount){
-        maxCCount=grid[0][i];
-        maxCol = i;
-      }
-    }
-    if(maxCol == -1 && maxRow == -1)break;
-    if(maxRCount > maxCCount){
-      output.push_back(maxRow);
-      grid[maxRow][0] = n-grid[maxRow][0];
-      for (int i = 1; i <= n; i++)
-      {
-        if(grid[maxRow][i]){
-          grid[0][i]--;
-          grid[maxRow][i] = 0;
-        }else{
-          grid[0][i]++;
-          grid[maxRow][i] = 0;
-        }
-      }
-      
+  for (int i = 1; i <= n; i++)
+  {
+    if(grid[i][0] >= n/2.0){
+      output.push_back(i);
+      grid[i][0] = 1;
     }else{
-      output.push_back(10000 + maxCol);
-      grid[0][maxCol] = n-grid[0][maxCol];
+      grid[i][0] = 0;
+    }
+    grid[0][i] = 0;
+  }
+
+  printGraph();
+
+  for (int i = 1; i <= n; i++)
+  {
+    for (int j = 1; j <= n; j++)
+    {
+      grid[0][j]+=grid[i][j] ^ grid[i][0];
+    }
+  }
+  for (int i = 1; i <= n; i++)
+  {
+    if(grid[0][i] >= n/2.0){
+      output.push_back(10000 + i);
+      grid[0][i] = 1;
+    }else{
+      grid[0][i] = 0;
+    }
+  } 
+
+  
+
+  for (int i = 1; i <= n; i++)
+  {
+    for (int j = 1; j <= n; j++)
+    {
+      if((grid[i][j] ^ grid[i][0]) ^ grid[0][j]){
+        printf("-1");
+        return 0;
+      }
     }
   }
 
-
-  if(output.size() == 0){
-    printf("-1");
-    return 0;
-  }
   printf("%d", output.size());
   for (int i = 0; i < output.size(); i++)
   {
