@@ -1,0 +1,1 @@
+[{"input":"chad 12\nC 1 l\nC 1 l\nC 3 i\nC 4 a\nC 2 e\nC 6 x\nC 5 m\nQ cha\nQ z\nQ chadl\nQ chadlliam\nQ chadliam","output":"1\n-1\n2\n2\n8"}]
