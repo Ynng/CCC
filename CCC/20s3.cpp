@@ -11,20 +11,24 @@ char h[200005];
 int nLen, hLen;
 long long output;
 bool continueIt;
-map <string, int> dp;
+map<string, int> dp;
 int charCount[200];
 int needleCharCount[200];
 int bad[200005];
 
-void findString(){
+void findString()
+{
   for (int i = 0; i <= hLen - nLen; i++)
   {
-    if(bad[i])continue;
-    else{
-      if(dp[string(h+i, nLen)] == 0){
-      // printf("%s\n", string(h+i, nLen).c_str());
+    if (bad[i])
+      continue;
+    else
+    {
+      if (dp[string(h + i, nLen)] == 0)
+      {
+        // printf("%s\n", string(h + i, nLen).c_str());
         output++;
-        dp[string(h+i, nLen)] = 1;
+        dp[string(h + i, nLen)] = 1;
       }
     }
   }
@@ -38,7 +42,8 @@ int main()
   hLen = strlen(h);
   output = 0;
 
-  if(nLen>hLen){
+  if (nLen > hLen)
+  {
     printf("0");
     return 0;
   }
@@ -52,30 +57,40 @@ int main()
   }
   for (int j = 97; j <= 122; j++)
   {
-    if(charCount[j]!=needleCharCount[j]){
+    if (charCount[j] != needleCharCount[j])
+    {
       bad[0] = 1;
+      break;
     }
   }
   for (int i = 1; i <= hLen - nLen; i++)
   {
-    charCount[h[i-1]]--;
-    charCount[h[i+nLen-1]]++;
-    if(charCount[h[i-1]]!=needleCharCount[h[i-1]] || charCount[h[i+nLen-1]]!=needleCharCount[h[i+nLen-1]]){
-      bad[i] = 1;
-      continue;
+    charCount[h[i - 1]]--;
+    charCount[h[i + nLen - 1]]++;
+    for (int j = 97; j <= 122; j++)
+    {
+      if (charCount[j] != needleCharCount[j])
+      {
+        bad[i] = 1;
+        break;
+
+      }
     }
+    // if(charCount[h[i-1]]!=needleCharCount[h[i-1]] || charCount[h[i+nLen-1]]!=needleCharCount[h[i+nLen-1]]){
+    //   bad[i] = 1;
+    //   continue;
+    // }
   }
-  
+
   // for (int i = 0; i < hLen; i++)
   // {
   //   printf("bad: %d\n", bad[i]);
   // }
-  
 
   // sort(n, n + nLen);
   // do
   // {
-    
+
   //   if (continueIt)
   //     continue;
   //   // printf("%s\n", n);
