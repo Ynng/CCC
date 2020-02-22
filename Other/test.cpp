@@ -7,92 +7,51 @@ Code, Compile, Run and Debug online from anywhere in world.
 
 *******************************************************************************/
 #include <stdio.h>
-#include <vector>
-#include <functional>
+#include <initializer_list>
 
-std::vector<std::function<bool()>> auton;
+#define WAYPOINT_BEGIN pathfinderParams.waypoints.begin()
 
-class TestingClass
-{
-private:
-  bool value;
 
-public:
-  TestingClass(bool a)
-  {
-    value = a;
-  }
-
-  bool get()
-  {
-    return value;
-  }
-
-  void invert()
-  {
-    value = !value;
-  }
+struct PathfinderPoint {
+  double x;    // X coordinate relative to the start of the movement
+  double y;    // Y coordinate relative to the start of the movement
+  double theta; // Exit angle relative to the start of the movement
 };
 
-bool printStuffs(){
-  printf("I printed stuffs and return false\n");
-  return false;
+struct PathfinderParams {
+    std::initializer_list<PathfinderPoint> waypoints;
+    double velocity = 0.85;
+    bool backwards = false;
+};
+
+PathfinderParams pathfinderParams;
+
+
+void internalMovePathfinder() {
+
+	printf("------\nmoving from\n%.1f %.1f %.1f\nto\n%.1f %.1f %.1f\n------", (*WAYPOINT_BEGIN).x, (*WAYPOINT_BEGIN).y, (*WAYPOINT_BEGIN).theta,(*(WAYPOINT_BEGIN+1)).x, (*(WAYPOINT_BEGIN+1)).y, (*(WAYPOINT_BEGIN+1)).theta);
+
+	/*profileController->moveTo(
+		pathfinderParams.waypoints,
+		{pathfinderParams.velocity, 2.0, 10.0}, pathfinderParams.backwards, !(configs->redSide));*/
 }
+
+void moveOdomAsync(PathfinderParams params) {
+	pathfinderParams = params;
+	internalMovePathfinder();
+}
+
+
+
 
 int main()
 {
-  TestingClass test(false);
-
-  auton.push_back([&] {
-    return true || false;
-  });
-  auton.push_back([&] {
-    return test.get();
-  });
-  auton.push_back([&] {
-    return printStuffs();
-  });
-  printf("Length:%d\n", auton.size());
-  if (auton[0]())
-  {
-    printf("true\n");
-  }
-  else
-  {
-    printf("false\n");
-  }
-
-  if (auton[1]())
-  {
-    printf("true\n");
-  }
-  else
-  {
-    printf("false\n");
-  }
-
-  test.invert();
-
-  printf("invertted\n");
-
-  if (auton[1]())
-  {
-    printf("true\n");
-  }
-  else
-  {
-    printf("false\n");
-  }
-
-  
-  if (auton[2]())
-  {
-    printf("true\n");
-  }
-  else
-  {
-    printf("false\n");
-  }
-
-  return 0;
+    printf("Hello World\n");
+    
+    PathfinderParams test = {{{-26,7,90},{1,4,12},{1,2,143}},0.9,true};
+    
+    moveOdomAsync(test);
+    int idk;
+    scanf("%d",&idk);
+    return 0;
 }
