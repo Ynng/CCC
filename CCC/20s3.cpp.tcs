@@ -1,1 +1,1 @@
-[{"input":"abz\nababaaabbabz","output":"2"}]
+[{"input":"aab\nabacabaa","output":"2"},{"input":"gggggggg\npilqbbvitbcnyzadvlqlsvdxagwxkvwwqoponfhiqbynwmsfontjjvlgegnfxgggggggggtnjmwbxzhwlggggggggndwvizzkwoxfmwqtmgbwbsrnqoxfrltkcvaerokapmzuhohaggggggggwucpotxkggggggggdmsoinzgdwyavvttixlvheixjzxmiqwvzopjvmo","output":"1"}]

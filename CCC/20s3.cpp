@@ -3,35 +3,47 @@
 #include <cstring>
 #include <algorithm>
 #include <map>
+#include <unordered_set>
+#include <math.h>
+// #define DEBUG
 
 using namespace std;
+typedef long long ll;
 
 char n[200005];
 char h[200005];
 int nLen, hLen;
-long long output;
-bool continueIt;
-map<string, int> dp;
+ll output;
+ll hsh[200005];
 int charCount[200];
 int needleCharCount[200];
-int bad[200005];
+int base = 131;
+ll diff;
+ll mod = 1e9 + 7;
+unordered_set<ll> ans;
 
-void findString()
+bool checkSubstr()
 {
-  for (int i = 0; i <= hLen - nLen; i++)
+  for (int i = 'a'; i <= 'z'; i++)
   {
-    if (bad[i])
-      continue;
-    else
-    {
-      if (dp[string(h + i, nLen)] == 0)
-      {
-        // printf("%s\n", string(h + i, nLen).c_str());
-        output++;
-        dp[string(h + i, nLen)] = 1;
-      }
-    }
+    if (charCount[i] != needleCharCount[i])
+      return false;
   }
+  return true;
+}
+
+ll getHash(int i)
+{
+  return (hsh[i]% mod - (hsh[i - nLen] * diff) % mod +mod)%mod;
+}
+
+long long powll(long long base, long long exp)
+{
+    long long ans = 1;
+    for (base %= mod; exp; exp >>= 1, base = (base * base) % mod)
+        if (exp&1)
+            ans = (ans * base) % mod;
+    return ans;
 }
 
 int main()
@@ -42,6 +54,12 @@ int main()
   hLen = strlen(h);
   output = 0;
 
+  diff = powll(base, nLen);
+
+#ifdef DEBUG
+  printf("diff is %lld", diff);
+#endif
+
   if (nLen > hLen)
   {
     printf("0");
@@ -50,55 +68,41 @@ int main()
   for (int i = 0; i < nLen; i++)
   {
     needleCharCount[n[i]]++;
-  }
-  for (int i = 0; i < nLen; i++)
-  {
     charCount[h[i]]++;
   }
-  for (int j = 97; j <= 122; j++)
+  hsh[0] = h[0] - 'a' + 1;
+  for (int i = 1; i < hLen; i++)
   {
-    if (charCount[j] != needleCharCount[j])
-    {
-      bad[0] = 1;
-      break;
-    }
-  }
-  for (int i = 1; i <= hLen - nLen; i++)
-  {
-    charCount[h[i - 1]]--;
-    charCount[h[i + nLen - 1]]++;
-    for (int j = 97; j <= 122; j++)
-    {
-      if (charCount[j] != needleCharCount[j])
-      {
-        bad[i] = 1;
-        break;
-
-      }
-    }
-    // if(charCount[h[i-1]]!=needleCharCount[h[i-1]] || charCount[h[i+nLen-1]]!=needleCharCount[h[i+nLen-1]]){
-    //   bad[i] = 1;
-    //   continue;
-    // }
+    hsh[i] = ((hsh[i - 1] * base + h[i] - 'a' + 1) % mod + mod) % mod;
+    #ifdef DEBUG
+    printf("\nhash[%d] is %lld", i, hsh[i]);
+    #endif
   }
 
-  // for (int i = 0; i < hLen; i++)
-  // {
-  //   printf("bad: %d\n", bad[i]);
-  // }
+  if (checkSubstr())
+  {
+    ans.insert(hsh[nLen - 1]);
+    #ifdef DEBUG
+    printf("\nadded %lld to ans", hsh[nLen - 1]);
+    #endif
+  }
+  for (int i = nLen; i < hLen; i++)
+  {
+    charCount[h[i - nLen]]--;
+    charCount[h[i]]++;
 
-  // sort(n, n + nLen);
-  // do
-  // {
+    #ifdef DEBUG
+    printf("\n %c %c", h[i - nLen], h[i]);
+    #endif
 
-  //   if (continueIt)
-  //     continue;
-  //   // printf("%s\n", n);
-  //   if (strstr(h, n))
-  //     output++;
-  // } while (next_permutation(n, n + nLen));
-
-  findString();
-  printf("%lld", output);
+    if (checkSubstr())
+    {
+      ans.insert(getHash(i));
+      #ifdef DEBUG
+      printf("\nadded %lld to ans, i = %d", getHash(i), i);
+      #endif
+    }
+  }
+  std::cout << ans.size();
   return 0;
 }
