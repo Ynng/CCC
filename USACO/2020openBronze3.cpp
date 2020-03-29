@@ -81,10 +81,10 @@ int main(){
     memset(pro, 0, sizeof pro);
     memset(prok, 0, sizeof prok);
     pro[p0] = true;
-    int maxK = 1000;
+    int maxK = 300;
     int minK = 0;
     bool bad = false;
-
+    bool good = false;
     for (int i = 0; i < t; i++)
     {
       // if(!cows[A(i)] && !cows[A(i)]){
@@ -106,30 +106,63 @@ int main(){
         }
       }
 
-      if(minK>maxK){
-        bad = true;
-        break;
+      // if(minK>maxK){
+      //   bad = true;
+      //   break;
+      // }
+    }
+
+    for(int k = 0; k <= maxK + 5; k++){
+      memset(pro, 0, sizeof pro);
+      memset(prok, 0, sizeof prok);
+      pro[p0] = true;
+      bad = false;
+      for (int i = 0; i < t; i++)
+      {
+        if(pro[A(i)])
+          prok[A(i)]++;
+        if(pro[B(i)])
+          prok[B(i)]++;
+        if(pro[A(i)] ^ pro[B(i)]){
+          int sick = pro[A(i)] ? A(i) : B(i);
+          int healthy = pro[B(i)] ? A(i) : B(i);
+          if(prok[sick]<=k){
+            pro[healthy] = true;
+          }
+        }
+
+        // if(minK>maxK){
+        //   bad = true;
+        //   break;
+        // }
+      }
+      for (int i = 0; i < 105; i++)
+      {
+        if(pro[i]!=cows[i]){
+          bad = true;
+          break;
+        }
+      }
+      if(!bad)good = true;
+      if(!bad){
+        g_minK = min(k, g_minK);
+        g_maxK = max(k, g_maxK);
       }
     }
-    for (int i = 0; i < 105; i++)
-    {
-      if(pro[i]!=cows[i]){
-        bad = true;
-        break;
-      }
-    }
-    if(!bad){
-      g_minK = min(minK, g_minK);
-      g_maxK = max(maxK, g_maxK);
-      x++;
-    }
+    if(good)x++;
+    
+    // if(!bad){
+    //   g_minK = min(minK, g_minK);
+    //   g_maxK = max(maxK, g_maxK);
+    //   x++;
+    // }
   }
 
   std::ofstream out("tracing.out");
   out << x << " " << g_minK << " ";
   printf("%d %d ", x, g_minK);
 
-  if(g_maxK==1000){
+  if(g_maxK>=300){
     out<<"Infinity";
     printf("Infinity");
   }
