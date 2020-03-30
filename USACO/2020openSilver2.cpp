@@ -15,7 +15,7 @@
 using namespace std;
 typedef long long ll;
 
-// #define DEBUG
+#define DEBUG
 
 int n, m;
 int ia, ib;
