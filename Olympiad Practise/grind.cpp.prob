@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: grind","srcPath":"e:\\GitHub\\Practice\\Olympiad Practise\\grind.cpp","tests":[{"id":1594073815165,"input":"7\n1 3\n1 4\n2 5\n3 7\n4 7\n6 9\n7 8","output":"3"}],"timeLimit":3000,"url":"e:\\GitHub\\Practice\\Olympiad Practise\\grind.cpp"}
