@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: ccc00s2","srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 2\\ccc00s2.cpp","tests":[{"id":1594687639387,"input":"3\n10\n20\n30\n99\n1\n50\n88\n3\n88\n2\n77","output":"5 55"}],"timeLimit":3000,"url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 2\\ccc00s2.cpp"}
