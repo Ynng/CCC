@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: tss17b","srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 2\\tss17b.cpp","tests":[{"id":1594690444574,"input":"4 3\n2 2\n-4 0\n0 -5\n-5 -5\n2\n4\n6","output":"0\n2\n3"}],"timeLimit":3000,"url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 2\\tss17b.cpp"}

@@ -71,7 +71,8 @@
         "bitset": "cpp",
         "cerrno": "cpp",
         "climits": "cpp",
-        "locale": "cpp"
+        "locale": "cpp",
+        "bit": "cpp"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
