@@ -40,71 +40,42 @@ typedef vector<pl> vpl;
 #define MAXN 3000005
 // #define DEBUG
 
-ll N, K;
-ll arr[MAXN];
-ll ansr = 0;
-multiset<ll> s;
-
-#define ARR(i) (arr[i] * N + (N - i))
-#define POS(i) (N - ((i) % N))
-void removeBefore(int last, int l)
-{
-  for (int i = last + 1; i <= l; i++)
-    s.erase(s.find(ARR(i)));
-}
-
-void prints()
-{
-  printf("Set: ");
-  for (multiset<ll>::iterator it = s.begin(); it != s.end(); ++it)
-    printf("%lld|%lld, ", POS(*it), *it / N);
-  printf("\n");
-}
+int N, K;
+int arr[MAXN];
+multiset<int> s;
+deque<int> smol, big;
 
 int main()
 {
-  scanf("%lld %lld", &N, &K);
+  scanf("%d %d", &N, &K);
   for (int i = 1; i <= N; i++)
   {
-    scanf("%lld", arr + i);
+    scanf("%d", arr + i);
   }
 
-  ansr = 1;
+  ll answer = 0;
 
-  s.insert(ARR(1));
-
-  ll l = 0, last = 0;
-  for (ll i = 2; i <= N; i++)
+  for (int i = 1, l = 0; i <= N; i++)
   {
+    while (!smol.empty() && arr[i] < arr[smol.back()])
+      smol.pop_back();
+    while (!big.empty() && arr[i] > arr[big.back()])
+      big.pop_back();
+    smol.pb(i);
+    big.pb(i);
 
-    while (s.size() > 0 && *s.begin() / N < arr[i] - K)
+    while (arr[big.front()] > arr[smol.front()] + K)
     {
-      l = POS(*s.begin());
-      // l = POS(*s.lower_bound((arr[i] - K) * N + N));
-      removeBefore(last, l);
-      last = l;
+      l++;
+      if (smol.front() <= l)
+        smol.pop_front();
+      if (big.front() <= l)
+        big.pop_front();
     }
-
-    while (s.size() > 0 && *(--s.end()) / N > arr[i] + K)
-    {
-      l = POS(*(--s.end()));
-      // l = POS(*s.upper_bound((arr[i] + K) * N - 1));
-      removeBefore(last, l);
-      last = l;
-    }
-
-    s.insert(ARR(i));
-    ansr += i - l;
-
-    #ifdef DEBUG
-    prints();
-    printf("sum: %lld ", ansr);
-    #endif
-
+    answer += i - l;
   }
-  scanf("%lld %lld", &N, &K);
 
-  printf("%lld", ansr);
+  printf("%lld", answer);
 
   return 0;
 }
