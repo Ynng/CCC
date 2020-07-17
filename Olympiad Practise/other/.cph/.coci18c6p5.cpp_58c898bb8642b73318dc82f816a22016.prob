@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: coci18c6p5","srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\other\\coci18c6p5.cpp","tests":[{"id":1595016785581,"input":"2 3 200\n2 3 4\n5 6 7","output":"2"}],"timeLimit":3000,"url":"f:\\GitHub\\Practice\\Olympiad Practise\\other\\coci18c6p5.cpp"}
