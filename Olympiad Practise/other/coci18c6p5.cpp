@@ -55,7 +55,7 @@ int main()
 
       if(i==1 && j == 1)
       C.insert(CV);
-      C.find()
+      // C.find()
     }
   }
 
