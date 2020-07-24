@@ -21,6 +21,10 @@ class Cipher:
     def _pad(self, s):
         return s + (AES.block_size - len(s) % AES.block_size) * (AES.block_size - len(s) % AES.block_size).to_bytes(1, 'big')
 
+    def decrypt(self, key, hash):
+        cipher = AES.new(key, AES.MODE_ECB)
+        cipher.decrypt(hash)
+
 
 c = Cipher(os.urandom(256))
 
