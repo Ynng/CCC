@@ -23,14 +23,38 @@ class Cipher:
 
     def decrypt(self, key, hash):
         cipher = AES.new(key, AES.MODE_ECB)
-        cipher.decrypt(hash)
+        return cipher.decrypt(hash)
 
 
-c = Cipher(os.urandom(256))
+cipher = Cipher(os.urandom(256))
 
 
-with open('flag', 'rb') as f:
-    flag = f.read()
+# with open('flag', 'rb') as f:
+#     flag = f.read()
+
+# print(f'Flag: {c.encrypt(flag).decode()}')
+hashbytes = base64.urlsafe_b64decode("53rW_RiyUiwXq3PD7E4RHJuzjlHbw4YmG8wNRILXEQdBFiJZlpI2WjD_kNeQAUYG")
 
 
-print(f'Flag: {c.encrypt(flag).decode()}')
+for a in range (0, 256):
+    for b in range (0, 256):
+        for c in range (0, 256):
+            keyarr = bytes([a,b,c])
+
+            key = base64.urlsafe_b64encode(keyarr * 8)
+            # print(key.decode())
+            try:
+                flag = cipher.decrypt(key, hashbytes).decode()
+                if "ctf{" in flag:
+                    print(flag)
+                    input("enter")
+            except UnicodeDecodeError as e:
+                something = 1
+
+    print(f"a = {a}")
+
+
+
+# test = "ctf{testing_testing123}"
+# flag = c.encrypt(test).decode()
+# print(f'Flag: {"ctf{" in c.decrypt("tes", hashbytes).decode()}')
