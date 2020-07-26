@@ -1,1 +1,34 @@
 ctf{D3compiling_Ex3cut4bl3s_Is_EZ_5e}
+
+
+|A4$wb!Of(O6H>5PQ? 6 Tb&CJEHELIK?6a~BP?
+|A4$wb!Of(O6H>5PQ? 6 Tb&CJEHELIK?6a~BP?
+
+?PB~a6?KILEHEJC&bT6?QP5>H6O(fO!bw$4A|
+
+
+
+63 80 66 126 97 54 63 75 73 76 69 72 69 74 67 38 98 84 54 63 81 80 53 62 72 54 79 40 102 79 33 98 119 36 52 65 124
+
+
+33---42	48---57	61---86	94---119	124	 126
+   95     105-n   n+36    n-29       }    {
+
+
+
+126 -> 123
+124 -> 125
+33~42 + i%10 -> 95
+
+//Number
+48 to 57
+57 to 48
+
+//Upper case
+65 to 90
+94 to 119
+
+
+//Lower case
+97 to 122
+61 to 86
