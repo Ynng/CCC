@@ -1,7 +1,7 @@
 // Java 8 is the only good Java
 import java.util.ArrayList;
 
-public class Main {
+public class ectf20p13Main {
     public static void main(String[] args) {
         String flag = args[0];
         String returnValue = CTF(flag);
@@ -17,7 +17,7 @@ public class Main {
 
     public static String CTF(String s) {
         String ret = "";
-        for (int index = 0; index < s.length(); index += chunkSize) {
+        for (int index = 0; index < s.length(); index += chunkSize) { 
             String t = "";
             for (int place = 0; place < chunkSize && index + place < s.length(); place++) {
                 t += s.charAt(index + place);
