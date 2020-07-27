@@ -1,0 +1,24 @@
+ctf{is_this_dp_in_a_ctf_c71448d248b0}
+ctf{is_this_dp_in_a_ctf_c71448d248b0}
+ctf{is_this_dp_in_a_ctf_c7144848b0}
+
+
+0: ct
+1: f{
+2: is
+3: _t
+4: hi
+5: s_
+6: dp
+7: _i
+8: n_
+9: a_
+10: ct
+11: f_
+12: c7
+13: 14
+14: 48
+15: 
+16: 48
+17: b0
+18: }
