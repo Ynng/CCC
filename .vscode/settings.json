@@ -72,7 +72,10 @@
         "cerrno": "cpp",
         "climits": "cpp",
         "locale": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "chrono": "cpp",
+        "thread": "cpp",
+        "ratio": "cpp"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
