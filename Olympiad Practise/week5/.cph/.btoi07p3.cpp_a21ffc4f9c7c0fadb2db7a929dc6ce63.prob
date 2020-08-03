@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: btoi07p3","srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week5\\btoi07p3.cpp","tests":[{"id":1596486683688,"input":"7 2 0\n0 1 1 2 3 2 2","output":"2\n6"}],"timeLimit":3000,"url":"f:\\GitHub\\Practice\\Olympiad Practise\\week5\\btoi07p3.cpp"}
