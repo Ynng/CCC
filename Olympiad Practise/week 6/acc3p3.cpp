@@ -40,25 +40,11 @@ typedef vector<pl> vpl;
 
 const int MOD = 1e9+7, MX = 100000 + 5;
 
-ll N , M;
-ll a[MX];
-ll answer = 0;
-map<ll,ll> m;
+int N;
 int main()
 {
-  scanf("%lld %lld", &N, &M);
-  for(int i = 1; i <= N; i++)
-  {
-    scanf("%lld", a+i);
-    a[i]+=a[i-1];
-  }
-
-  m[0]++;
-  for(int i = 1; i <= N; i++)
-  {
-    answer+=m[a[i]%M];
-    m[a[i]%M]++;
-  }
-  printf("%lld", answer);
+  
+  
+  
   return 0;
 }

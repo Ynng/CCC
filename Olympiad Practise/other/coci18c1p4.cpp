@@ -38,27 +38,15 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MOD = 1e9+7, MX = 100000 + 5;
+const int MOD = 1e9+7, MX = 2000 + 5;
 
-ll N , M;
-ll a[MX];
-ll answer = 0;
-map<ll,ll> m;
+int N, M;
 int main()
 {
-  scanf("%lld %lld", &N, &M);
-  for(int i = 1; i <= N; i++)
-  {
-    scanf("%lld", a+i);
-    a[i]+=a[i-1];
-  }
+  scanf("%d %d", &N, &M);
 
-  m[0]++;
-  for(int i = 1; i <= N; i++)
-  {
-    answer+=m[a[i]%M];
-    m[a[i]%M]++;
-  }
-  printf("%lld", answer);
+  
+  
+  
   return 0;
 }
