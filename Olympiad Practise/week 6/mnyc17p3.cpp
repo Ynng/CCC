@@ -40,7 +40,7 @@ typedef vector<pl> vpl;
 
 const int MOD = 1e9+7, MX = 1000000 + 5;
 
-
+//Hashing example
 
 char A[MX], B[MX];
 ll hshA[MX], hshB[MX];
