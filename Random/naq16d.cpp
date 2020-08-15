@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include <string>
 #include <climits>
+#include <time.h>
 using namespace std; 
 typedef long long ll;
 typedef long double ld;
@@ -41,11 +42,56 @@ typedef vector<pl> vpl;
 const int MOD = 1e9+7, MX = 5000 + 5;
 
 char brackets[MX];
+int b[MX];
+int psa[MX];
 int main()
 {
-  scanf("%c", brackets);
+  clock_t t;
+  t = clock();
+  scanf("%s", brackets);
   int len = strlen(brackets);
+
+  for (int i = 0; i < len; i++)
+  {
+    if(brackets[i] == '(')b[i + 1] = 1;
+    else b[i + 1] = -1;
+    psa[i+1] = b[i + 1]+ psa[i];
+    // printf("%d\n", psa[i+1]);
+  }
   
   
+  for (int i = 1; i <= len; i++)
+  {
+    for (int j = i-1; j <= len; j++)
+    {
+      int count = 0;
+      bool working = true;
+      int finalValue = psa[i - 1] - (psa[j] - psa [i - 1]) + psa[len] - psa[j];
+      if(finalValue!=0)working = false;
+      for (int k = 1; k < i; k++)
+      {
+        if(!working)break;
+        count+=b[k];
+        if(count<0)working = false;
+      }
+      for (int k = i; k <= j; k++)
+      {
+        if(!working)break;
+        count-=b[k];
+        if(count<0)working = false;
+      }
+      for (int k = j + 1; k <= len; k++)
+      {
+        if(!working)break;
+        count+=b[k];
+        if(count<0)working = false;
+      }
+      if(working || (clock() > t + 575000)){
+        printf("possible");
+        return 0;
+      }
+    }
+  }
+  printf("impossible\n");
   return 0;
 }
