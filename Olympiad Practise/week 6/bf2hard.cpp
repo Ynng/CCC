@@ -52,17 +52,36 @@ ll getSubStrHash(int i, int len)
 }
 
 
-int lexicompare(int a, int b, int len){
+int lexicompare(int a, int b, int l){
   if(a==-1 || b==-1)return 0;
-  if(getSubStrHash(a+len-1, len)==getSubStrHash(b+len-1, len)){
-    return len-1;
+  
+  int lastI;
+  bool smaller;
+  if(getSubStrHash(a+l-1, l)==getSubStrHash(b+l-1, l)){
+    lastI = l - 1;
+    smaller = true;
+  }else{
+    for (int i = 0; i < l; i++)
+    {
+      lastI = i;
+      if((str[a  + i]) > (str[b+ i])){
+        smaller = false;
+        break;
+      }
+      else if((str[a + i]) < (str[b + i])){
+        smaller = true;
+        break;
+      }
+    }
   }
-  for (int i = 0; i < len; i++)
-  {
-    if((str[a  + i]) > (str[b+ i]))return -i - 1;
-    else if((str[a + i]) < (str[b + i]))return i;
-  }
-  return len - 1;
+
+  if(lastI + a > len - K)
+    lastI = len - K - a -1;
+  if(lastI < 0)
+    lastI = 0;
+  
+  if(!smaller)return -lastI - 1;
+  else return lastI;
 }
 
 int charcount[500];
@@ -96,12 +115,10 @@ int main()
       if(str[i] == c){
         int temp = lexicompare(i, minPos, K);
         if(temp < 0){
-          if(i < len - K * 2 + 1 || charcount[c-1] == 0)
-            i-=(temp+1);
+          i-=(temp+1);
         }else{
           minPos = i;
-          if(i < len - K * 2 + 1 || charcount[c-1] == 0)
-            i+=temp;
+          i+=temp;
         }
       }
     }
