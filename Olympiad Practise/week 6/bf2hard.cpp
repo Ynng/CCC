@@ -55,7 +55,6 @@ ll getSubStrHash(int i, int len)
 int lexicompare(int a, int b, int len){
   if(a==-1 || b==-1)return 0;
   if(getSubStrHash(a+len-1, len)==getSubStrHash(b+len-1, len)){
-    printf("same hash\n");
     return len-1;
   }
   for (int i = 0; i < len; i++)
