@@ -75,7 +75,11 @@
         "bit": "cpp",
         "chrono": "cpp",
         "thread": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "stack": "cpp",
+        "cassert": "cpp",
+        "forward_list": "cpp",
+        "regex": "cpp"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,

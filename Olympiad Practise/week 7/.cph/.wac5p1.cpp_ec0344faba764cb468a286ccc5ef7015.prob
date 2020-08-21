@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: wac5p1","srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 7\\wac5p1.cpp","tests":[{"id":1597969617365,"input":"4\n1 2 2 1","output":"4"},{"id":1597969625201,"input":"5\n1 2 3 2 1","output":"5"}],"timeLimit":3000,"url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 7\\wac5p1.cpp"}
