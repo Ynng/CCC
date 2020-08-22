@@ -30,7 +30,7 @@ int N;
 char str[MX];
 ll hsh[MX];
 ll p[MX];
-ll base = 4073;
+ll base = 29;
 
 struct hashpair
 {
@@ -69,7 +69,7 @@ int main()
   p[0] = 1;
 
   for (int i = 1; i <= N; i++)
-    hsh[i] = hsh[i - 1] * base + str[i - 1];
+    hsh[i] = hsh[i - 1] * base + str[i - 1] - 'a' + 1;
   for (int i = 1; i <= N; i++)
     p[i] = p[i - 1] * base;
 
