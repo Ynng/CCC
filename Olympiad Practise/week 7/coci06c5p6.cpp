@@ -29,8 +29,10 @@ const ll MOD = 1e9 + 7, MX = 200000 + 5;
 int N;
 char str[MX];
 ll hsh[MX];
-ll p[MX];
+ll hsh2[MX];
+ll p[MX], p2[MX];
 ll base = 29;
+ll base2 = 131;
 
 struct hashpair
 {
@@ -58,7 +60,9 @@ unordered_set<hashpair> seenHash;
 
 ll getSubStrHash(int i, int len)
 {
-  return hsh[i] - (hsh[i - len] * p[len]);
+  ll hash1 = hsh[i] - (hsh[i - len] * p[len]);
+  ll hash2 = hsh2[i] - (hsh2[i - len] * p2[len]);
+  return hash1 ^ hash2;
 }
 
 int main()
@@ -67,11 +71,16 @@ int main()
   scanf("%s", str);
 
   p[0] = 1;
-
+  p2[0] = 1;
   for (int i = 1; i <= N; i++)
     hsh[i] = hsh[i - 1] * base + str[i - 1] - 'a' + 1;
   for (int i = 1; i <= N; i++)
     p[i] = p[i - 1] * base;
+
+  for (int i = 1; i <= N; i++)
+    hsh2[i] = hsh2[i - 1] * base2 + str[i - 1] - 'a' + 1;
+  for (int i = 1; i <= N; i++)
+    p2[i] = p2[i - 1] * base2;
 
   int l = 1, r = N-1;
   int sL; //substring length
