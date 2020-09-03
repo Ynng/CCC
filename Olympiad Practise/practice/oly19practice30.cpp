@@ -24,30 +24,33 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MOD = 1e9 + 7, MX = 200000 + 5;
+const int MOD = 1e9 + 7, MX = 100 + 5;
 
-char S[MX], T[MX];
-int len;
-char mapping[300];
-bool taken[300];
+int w, h;
+char str[MX];
 int main()
 {
-  scanf("%s %s", S, T);
-  len = strlen(S);
+  scanf("%d %d", &h, &w);
 
-  for (int i = 0; i < len; i++)
+  for (int i = 0; i < w + 2; i++)
   {
-    if ((mapping[S[i]] != 0 && mapping[S[i]] != T[i]) || (mapping[S[i]] == 0 && taken[T[i]]))
-    {
-      printf("No\n");
-      return 0;
-    }
+    printf("#");
+  }
+  printf("\n");
 
-    mapping[S[i]] = T[i];
-    taken[T[i]] = true;
+  for (int i = 0; i < h; i++)
+  {
+    printf("#");
+    scanf("%s", str);
+    printf("%s", str);
+    printf("#\n");
   }
 
-  printf("Yes\n");
+  for (int i = 0; i < w + 2; i++)
+  {
+    printf("#");
+  }
+  printf("\n");
 
   return 0;
 }
