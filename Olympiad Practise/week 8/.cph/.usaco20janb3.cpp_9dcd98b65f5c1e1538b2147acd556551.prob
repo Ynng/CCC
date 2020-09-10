@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: usaco20janb3","srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 8\\usaco20janb3.cpp","tests":[{"id":1599702946316,"input":"10 5\n1\n2\n3\n4\n5","output":"6\n5\n5\n4\n4"}],"timeLimit":3000,"url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 8\\usaco20janb3.cpp"}
