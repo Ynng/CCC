@@ -1,0 +1,1 @@
+{"name":"Local: spree","url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 9\\spree.cpp","tests":[{"id":1600541953290,"input":"8 48\n10 7\n5 1\n50 30\n5 1\n10 5\n100 1000\n25 10\n60 40","output":"95"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 9\\spree.cpp","group":"local","local":true}
