@@ -7,13 +7,13 @@ typedef pair<ll, int> pli;
 typedef pair<int, ll> pil;
 typedef pair<ll,ll> pl;
 typedef pair<ld,ld> pd;
- 
+
 typedef vector<int> vi;
 typedef vector<ld> vd;
 typedef vector<ll> vl;
 typedef vector<pi> vpi;
 typedef vector<pl> vpl;
- 
+
 #define sz(x) (int)(x).size()
 #define mp make_pair
 #define pb push_back
