@@ -1,19 +1,19 @@
 #include <bits/stdc++.h>
-using namespace std; 
+using namespace std;
 typedef long long ll;
 typedef long double ld;
 typedef pair<int, int> pi;
 typedef pair<ll, int> pli;
 typedef pair<int, ll> pil;
-typedef pair<ll,ll> pl;
-typedef pair<ld,ld> pd;
- 
+typedef pair<ll, ll> pl;
+typedef pair<ld, ld> pd;
+
 typedef vector<int> vi;
 typedef vector<ld> vd;
 typedef vector<ll> vl;
 typedef vector<pi> vpi;
 typedef vector<pl> vpl;
- 
+
 #define sz(x) (int)(x).size()
 #define mp make_pair
 #define pb push_back
@@ -24,51 +24,55 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MOD = 1e9+7, MX = 500000 + 5;
+const int MOD = 1e9 + 7, MX = 200000 + 5;
 
 int N;
+int h[MX];
+int a[MX];
 
-//bit example
-//binary index tree
-int bit[MX];
+ll bit[MX];
+ll dp[MX];
 
-ll query(int r)
+ll getMax(int r)
 {
   ll sum = 0;
   while (r > 0)
   {
-    sum += bit[r];
+    sum = max(bit[r], sum);
     r ^= (r & -r);
   }
   return sum;
 }
 
-void update(int dif, int index)
+void update(ll dif, int index)
 {
   while (index <= N)
   {
-    bit[index] += dif;
+    if(dif>bit[index])
+      bit[index] = dif;
     index += (index & -index);
   }
 }
-
 int main()
 {
   scanf("%d", &N);
-  ll inversion = 0;
-  for(int i = 1, val; i <= N; i++)
+  for (int i = 1; i <= N; i++)
   {
-    scanf("%d", &val);
-    ll less = query(val);
-    ll more = i-less-1;
-    if(less > more)
-      inversion+=more;
-    else
-      inversion+=less;
-
-    update(1, val);
+    scanf("%d", h + i);
   }
-
-  printf("%lld\n", inversion);
+  for (int i = 1; i <= N; i++)
+  {
+    scanf("%d", a + i);
+  }
+  
+  ll answer = 0;
+  for(int i = 1; i <= N; i++)
+  {
+    ll maxPrevious = getMax(h[i]);
+    dp[i] = maxPrevious + a[i];
+    update(dp[i], h[i]);
+    answer = max(dp[i], answer);
+  }
+  printf("%lld", answer);
   return 0;
 }

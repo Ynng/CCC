@@ -1,0 +1,1 @@
+{"name":"Local: cco10p3","url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 10\\cco10p3.cpp","tests":[{"id":1601150205509,"input":"7\nN 10 1000\nN 3 1014\nQ 1\nM 10 2000\nQ 1\nN 65 1950\nQ 2","output":"3\n10\n65"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 10\\cco10p3.cpp","group":"local","local":true}

@@ -51,6 +51,11 @@ ll a[MXL][MXL];
 ll dp[MX];
 int link[MX];
 
+//2d binary indexed tree
+//2d bit
+//binary indexed tree maximum pair
+//pair binary indexed tree
+
 pli getMax(int x, int y)
 {
   ll mx = 0;

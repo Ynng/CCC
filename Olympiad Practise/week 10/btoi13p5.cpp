@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
-using namespace std; 
+using namespace std;
 typedef long long ll;
 typedef long double ld;
 typedef pair<int, int> pi;
 typedef pair<ll, int> pli;
 typedef pair<int, ll> pil;
-typedef pair<ll,ll> pl;
-typedef pair<ld,ld> pd;
+typedef pair<ll, ll> pl;
+typedef pair<ld, ld> pd;
 
 typedef vector<int> vi;
 typedef vector<ld> vd;
@@ -24,79 +24,57 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MOD = 1e9+7, MX = 4000 + 5;
+const int MOD = 1e9 + 7, MX = 4000 + 5;
 
 int H, W;
-char m[MX][MX];
-int mark[MX][MX];
-vector<int> g[MX*MX/2];
-bool visited[MX*MX/2];
+char g[MX][MX];
+bool visited[MX][MX];
+queue<pi> q, q1;
 
-void dfs(int i, int j, int count, char c){
-  if(mark[i][j]){
-    if(mark[i][j]!=0 && mark[i][j]!=count){
-      g[count].push_back(mark[i][j]);
-      g[mark[i][j]].push_back(count);
-    }
-    return;
-  }
-  if(m[i][j]!=c)return;
-  mark[i][j] = count;
-  i++;
-  dfs(i,j,count, c);
-  i-=2;
-  dfs(i,j,count, c);
-  i++;
-  j++;
-  dfs(i,j,count, c);
-  j-=2;
-  dfs(i,j,count, c);
-}
-
-int main()
+void bfs(int count, char c)
 {
-  scanf("%d %d", &H, &W);
-  for(int i = 1; i <= H; i++)
-  {
-    for(int j = 1; j <= W; j++)
-    {
-      scanf(" %c", &m[i][j]);
-    }
-  }
-
-  int count = 0;
-  for(int i = 1; i <= H; i++)
-  {
-    for(int j = 1; j <= W; j++)
-    {
-      char cur = m[i][j];
-      if(cur != '.' && mark[i][j] == 0){
-        count++;
-        dfs(i,j, count, cur);
+  int move[4][2]={{-1,0},{1,0},{0,-1},{0,1}};
+  while(!q.empty()){
+    int i,j;
+    tie(i,j)=q.front();
+    q.pop();
+    for(int k = 0; k < 4; k++){
+      int ni = i + move[k][0];
+      int nj = j + move[k][1];
+      if (visited[ni][nj]) continue;
+      if(ni<1 || nj < 1 || ni>H || nj > W || g[ni][nj]=='.') continue;
+      visited[ni][nj]=true;
+      if (g[ni][nj] == c){
+        q.push({ni,nj});
+      }else{
+        q1.push({ni,nj});
       }
     }
   }
 
-  queue<pi> q;
-  q.push({1,1});
-  int mx = 0;
-  visited[1]=true;
+}
 
-  while(!q.empty()){
-    pi curp = q.front();
-    int cur = curp.f;
-    q.pop();
-    mx = max(mx, curp.s);
-    for (auto itr = g[cur].begin(); itr != g[cur].end(); ++itr) {
-      if(visited[*itr])continue;
-      visited[*itr] = true;
-      q.push({*itr, curp.s+1});
-    }
+int main()
+{
+  int rcount = 0, fcount = 0;
+  scanf("%d %d", &H, &W);
+  for (int i = 1; i <= H; i++)
+    for (int j = 1; j <= W; j++)
+      scanf(" %c", &g[i][j]);
+
+  int count = 0;
+  int cur = g[1][1];
+  q1.push({1, 1});
+  visited[1][1]=true;
+  while (!q1.empty())
+  {
+    count++;
+    swap(q, q1);
+    bfs(count, cur);
+    cur = cur == 'F' ? 'R' : 'F';
   }
 
-  
+  printf("%d\n", count);
 
-  printf("%d", mx);
-  
   return 0;
 }

@@ -27,16 +27,48 @@ typedef vector<pl> vpl;
 const int MOD = 1e9+7, MX = 1000 + 5;
 
 int N, M, K;
-pi items[MX];
+int cost[MX];
+int val[MX];
+int deals[MX][2];
+ll dp[MX];
+
+//Binary package
+//DP knapsack
+
 int main()
 {
   scanf("%d %d %d", &N, &M, &K);
   for(int i = 1,a,b; i <= N; i++)
   {
-    scanf("%d %d", &a, &b);
-    items[i] = {a,b};
-  
-}
+    scanf("%d %d", cost+i, val+i);
+    //Unlimited knapsack
+    //reverse looping for unlimited
+    for(int j = cost[i]; j<=K; j++){
+      dp[j] = max(dp[j], dp[j-cost[i]] + val[i]);
+    }
+  }
+  for(int i = 1, q, t, d, a; i <= M; i++)
+  {
+    scanf("%d %d %d %d", &q, &t, &d, &a);
+    //binary package
+    //limited knapsack
+    for(int k = 1; k <= a; k=k*2){
+      int w = k*d;
+      ll v = k * (ll)q * val[t];
+      for(int j=K; j>=w; j--){
+        dp[j]=max(dp[j], dp[j-w] + v);
+      }
+      a-=k;
+    }
+    int w = a*d;
+    ll v = a * (ll)q * val[t];
+    for(int j=K; j>=w; j--){
+      dp[j]=max(dp[j], dp[j-w] + v);
+    }
+  }
+
+  printf("%lld\n", dp[K]);
+
   
   
   return 0;
