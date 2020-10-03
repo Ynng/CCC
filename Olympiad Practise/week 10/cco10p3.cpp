@@ -89,12 +89,10 @@ int main()
   }
 
   sort(inputRatings.begin(), inputRatings.end());
-  int last = 0;
+  inputRatings.resize(unique(inputRatings.begin(), inputRatings.end()) - inputRatings.begin());
   int cc = 1;
-  for (int i = inputRatings.size()-1; i >= 0; i--)
-  {
+  for (int i = inputRatings.size()-1; i >= 0 ; i--){
     comp[inputRatings[i]] = cc;
-    // printf("%d %d\n", inputRatings[i], cc);
     cc++;
   }
 
