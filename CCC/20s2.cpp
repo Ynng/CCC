@@ -1,68 +1,68 @@
-#include <iostream>
-#include <cmath>
 
-#define CURRENT grid[row][col]
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+typedef pair<int, int> pi;
+typedef pair<ll, int> pli;
+typedef pair<int, ll> pil;
+typedef pair<ll, ll> pl;
+typedef pair<ld, ld> pd;
 
-int m, n;
+typedef vector<int> vi;
+typedef vector<ld> vd;
+typedef vector<ll> vl;
+typedef vector<pi> vpi;
+typedef vector<pl> vpl;
+
+#define INF 0x3f3f3f3f            // for int
+#define LL_INF 0x3f3f3f3f3f3f3f3f // for ll
+#define sz(x) (int)(x).size()
+#define ms(x, y) memset(x, y, sizeof(x))
+#define mp make_pair
+#define pb push_back
+#define f first
+#define s second
+#define lb lower_bound
+#define ub upper_bound
+#define all(x) x.begin(), x.end()
+#define ins insert
+
+const int MOD = 1e9 + 7, MX = 10000 + 5;
+
+int M, N;
 int grid[1005][1005];
 bool visited[1000005];
-bool finished = false;
+vector<int> adj[1000005];
+#define CURRENT grid[row][col]
 
-void printGrid(){
-  for (int i = 1; i <= m; i++)
-  {
-    for (int j = 1; j <= n; j++)
-    {
-      printf("%d ", grid[i][j]);
+bool bfs()
+{
+  queue<int> q;
+  q.push(grid[1][1]);
+  while(!q.empty()){
+    if(q.front() == M*N)return true;
+    for(int n : adj[q.front()]){
+      if(visited[n])continue;
+      visited[n] = true;
+      q.push(n);
     }
-    printf("\n");
+    q.pop();
   }
-}
-
-void recursion(int row, int col){
-  // printf("recursion on %d %d", row, col);
-  if(row == m && col == n){
-    finished = true;
-    return;
-  }
-  if(visited[CURRENT]==true){
-    return;
-  }else{
-    visited[CURRENT]=true;
-  }
-  for (int i = 1; i <= sqrt(CURRENT)+0.5 && (i <= n || i <= m); i++)
-  {
-    if(CURRENT%i==0){
-      if(i<=m && (CURRENT / i)<=n){
-        recursion(i,CURRENT / i);
-      }
-      if(i<=n && (CURRENT / i)<=m){
-        recursion(CURRENT / i, i);
-      }
-      //Than we know the number can be divided by i
-    }
-  }
-  
+  return false;
 }
 
 int main()
 {
-  scanf("%d", &m);
-  scanf("%d", &n);
-  for (int i = 1; i <= m; i++)
-  {
-    for (int j = 1; j <= n; j++)
-    {
+  scanf("%d", &M);
+  scanf("%d", &N);
+  for (int i = 1; i <= M; i++)
+    for (int j = 1; j <= N; j++){
       scanf("%d", &grid[i][j]);
+      adj[i*j].push_back(grid[i][j]);
     }
-  }  
 
-  recursion(1,1);
-
-  if(finished){
-    printf("yes");
-  }else{
-    printf("no");
-  }
+  printf(bfs() ? "yes" : "no");
   return 0;
 }
