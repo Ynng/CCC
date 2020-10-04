@@ -29,7 +29,7 @@ const int MOD = 1e9+7, MX = 500000 + 5;
 int N;
 
 //bit example
-//binary index tree
+//binary indexed tree
 int bit[MX];
 
 ll query(int r)

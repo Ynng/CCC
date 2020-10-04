@@ -30,7 +30,7 @@ int N;
 int a[MX];
 ll psa[MX];
 
-//binary index tree ll
+//binary indexed tree ll
 //bit ll
 ll bit[MX*2];
 

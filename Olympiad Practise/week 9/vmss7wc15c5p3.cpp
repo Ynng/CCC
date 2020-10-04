@@ -1,4 +1,4 @@
-//diagonal binary index tree
+//diagonal binary indexed tree
 
 #include <bits/stdc++.h>
 using namespace std; 
