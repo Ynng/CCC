@@ -29,6 +29,7 @@ const int MOD = 1e9+7, MX = 100000 + 5;
 int t;
 ll a[MX], bit[MX];
 ll sorted[MX];
+//inversion
 unordered_map<ll, ll> c;
 
 ll getSum(int r)
