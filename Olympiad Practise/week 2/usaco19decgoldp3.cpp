@@ -55,8 +55,10 @@ int main()
       scanf(" %d", dis[i] + j);
 
   //Dijkstra on a loop to find?
-
   //floyd warshall
+  //shortest point between all nodes
+  //shortest point between all points
+  //graph theory
   for (int k = 0; k < M; k++)
     //middle "transfer" node
     for (int i = 0; i < M; i++)
