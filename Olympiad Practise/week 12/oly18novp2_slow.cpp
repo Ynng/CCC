@@ -31,7 +31,30 @@ typedef vector<pl> vpl;
 const int MOD = 1e9 + 7, MX = 1000000 + 5;
 
 int N, MXD;
-vector<int> in[MX];
+pi in[MX];
+ll bit[MX];
+
+//binary indexed tree
+
+ll query(int r)
+{
+  ll sum = 0;
+  while (r > 0)
+  {
+    sum += bit[r];
+    r ^= (r & -r);
+  }
+  return sum;
+}
+
+void update(ll dif, int index)
+{
+  while (index <= MXD)
+  {
+    bit[index] += dif;
+    index += (index & -index);
+  }
+}
 
 int main()
 {
@@ -39,19 +62,38 @@ int main()
   for (int i = 1, d, p; i <= N; i++)
   {
     scanf("%d %d", &d, &p);
+    in[i] = {d, p};
     MXD = max(MXD, d);
-    in[d].push_back(p);
   }
+  //lambda custom sorting
+  sort(in + 1, in + N + 1, [](const pi & arr, const pi & b) {
+    if(arr.s!=b.s)return arr.s>b.s;
+    else return arr.f<b.f;
+  });
+
+  for (int i = 1; i <= N; i++)
+    bit[i] = (i & -i);
+
   ll sum = 0;
-  priority_queue<int> pq;
-  for (int i = MXD; i >= 1; i--)
+  for (int i = 1; i <= N; i++)
   {
-    for(int h : in[i])
-      pq.push(h);
-    if(!pq.empty()){
-      sum+=pq.top();
-      pq.pop();
+    pi cur = in[i];
+    int l = 1;
+    int r = cur.f;
+    //binary search to find available spot
+    //logN * logN
+    int target = query(cur.f);
+    if(target<=0)continue;
+    //imagine, working binary search
+    //finds the first number that's bigger or equal to target
+    while(l<r){
+      int m = (l+r)/2;
+      int q = query(m);
+      if(q<target)l=m+1;
+      else r = m;
     }
+    update(-1, l);
+    sum+=cur.s;
   }
 
   printf("%lld\n", sum);
