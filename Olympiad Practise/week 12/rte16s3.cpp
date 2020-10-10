@@ -31,14 +31,33 @@ typedef vector<pl> vpl;
 const int MOD = 1e9 + 7, MX = 6000 + 5;
 int N, Q;
 vector<pi> in[MX];
-int p[MX][MX];
+vector<pi> etour;
+pi st[15][2*MX];
 ll dis[MX];
+int head[MX];
 bool visited[MX];
-int m[MX];
 
-//need better solution
-//TODO: ask about this one (p3)
+void dfs(int i, int d, ll dist){
+  visited[i]=true;
+  dis[i]=dist;
+  etour.push_back({d, i});
+  head[i]=etour.size();
+  for(pi child : in[i]){
+    if(visited[child.f])continue;
+    dfs(child.f, d+1, dist+child.s);
+    etour.push_back({d, i});
+  }
+} 
 
+//sparse table query (inclusive)
+//pair sparse table
+pi queryMin(int l, int r){
+  int k = log2(r-l+1);
+  return min(st[k][l], st[k][r-(1<<k)+1]);
+}
+
+//LCA lowest common ancestors
+//Euler tour + range minimum query
 int main()
 {
   scanf("%d", &N);
@@ -46,65 +65,30 @@ int main()
   for (int i = 1, a, b, w; i <= N - 1; i++)
   {
     scanf("%d %d %d", &a, &b, &w);
-    a++;
-    b++;
-    in[a].push_back({b, w});
-    in[b].push_back({a, w});
+    in[a].push_back({b,w});
+    in[b].push_back({a,w});
   }
+  dfs(0, 1, 0);
 
-  for (int i = 1; i <= N ; i++)
-    p[i][i]=i;
+  //initializing sparse table
+  int tourLen = etour.size();
+  int logLen = log2(tourLen);
+  for(int i = 1; i <= tourLen; i++)
+    st[0][i]=etour[i-1];
+  for (int k = 1; k <= logLen; k++)
+    for (int i = 1; i <= tourLen - (1 << k) + 1; i++)
+      st[k][i] = min(st[k - 1][i], st[k - 1][i + (1 << (k - 1))]);
 
-  queue<int> nodes;
-  queue<int> parents;
-  nodes.push(1);
-  parents.push(1);
-  visited[1]=true;
-  int c = 1;
-  m[1]=1;
-  while(!nodes.empty()){
-    int cur = nodes.front();
-    int parent = parents.front();
-    nodes.pop();
-    parents.pop();
-    // printf("cur %d\n", cur);
-    // for (int i = 1; i <= N; i++){
-    //   for (int j = 1; j <= N; j++)
-    //     printf("%d ", p[i][j]);
-    //   printf("\n");
-    // }
-    int ccur = m[cur];
-    for(pi child : in[cur]){
-      if(visited[child.f])continue;
-      visited[child.f]=true;
-      c++;
-      m[child.f]=c;
-      nodes.push(child.f);
-      parents.push(cur);
-      dis[c] = dis[ccur]+child.s;
-      for(int i = 1; i < c;i++)
-        if(p[ccur][i]){
-          p[c][i]=p[ccur][i];
-          p[i][c]=p[ccur][i];
-        }
-    }
-  }
 
-  // for (int i = 1; i <= N; i++){
-  //   for (int j = 1; j <= N; j++)
-  //     printf("%d ", p[i][j]);
-  //   printf("\n");
-  // }
-
+  //handling queries
   scanf("%d", &Q);
-  for (int i = 1, u, v; i <= Q; i++)
+  for(int i = 1, u, v; i <= Q; i++)
   {
     scanf("%d %d", &u, &v);
-    u++;
-    v++;
-    u = m[u];
-    v=m[v];
-    printf("%lld\n", dis[u]+dis[v]-2*dis[p[u][v]]);
+    int l = min(head[u], head[v]);
+    int r = max(head[u], head[v]);
+    int lca = queryMin(l, r).s;
+    printf("%lld\n", dis[u] + dis[v] - 2 * dis[lca]);
   }
 
   return 0;

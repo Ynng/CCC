@@ -59,7 +59,7 @@ int main()
   memcpy(stmin, a, sizeof(int) * (N+1));
   memcpy(stmax, a, sizeof(int) * (N+1));
 
-  logN = ceil(log2(N)) + 0.5;
+  logN = log2(N);
   //initializing sparse table (minimum)
   for (int k = 1; k <= logN; k++)
     for (int i = 1; i <= N - (1 << k) + 1; i++)
