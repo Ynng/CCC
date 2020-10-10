@@ -1,3 +1,7 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+#pragma GCC target "sse,sse2,sse3,sse4,abm,avx,mmx,popcnt"
+//fancy compiler stuffs that makes the program run so much faster???
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -32,61 +36,27 @@ const int MOD = 1e9 + 7, MX = 8192 + 5;
 
 int N, Q;
 int H[MX];
-short bit[MX][MX];
-//2d binary indexed tree (int)(short)
-//ask about this question
-int query(int x, int y)
-{
-  int val = 0;
-  for (int yi = y; yi > 0; yi -= (yi & -yi))
-    for (int xi = x; xi > 0; xi -= (xi & -xi))
-      val += bit[xi][yi];
-  return val;
-}
-
-void update(int x, int y, short diff)
-{
-  for (int yi = y; yi <= MX; yi += (yi & -yi))
-    for (int xi = x; xi <= MX; xi += (xi & -xi))
-      bit[xi][yi] += diff;
-}
 
 int main()
 {
   scanf("%d", &N);
-  for (int i = 1; i <= N; i++){
+  for (int i = 0; i < N; i++){
     scanf("%d", H + i);
-    H[i]++;
-    update(i, H[i], 1);
   }
-  // for (int i = N; i > 0; i--){
-  //   for (int j = 1; j <= N; j++){
-  //     printf("%lld ", query(j, i) - query(j-1,i) - query(j,i-1) + query(j-1,i-1));
-  //   }
-  //   printf("\n");
-  // }
-
-
   scanf("%d", &Q);
-  for (int q = 1, c; q <= Q; q++)
+  int i,j,a,b,h,c;
+  int cnt, rng;
+  while(Q--)
   {
     scanf("%d", &c);
     if(c==1){
-      int i,j,a,b;
       scanf("%d %d %d %d", &i, &j, &a, &b);
-      i++;
-      j++;
-      a++;
-      b++;
-      printf("%d\n", query(j, b) - query(i-1,b) - query(j,a-1) + query(i-1,a-1));
+      cnt = 0, rng = b - a;
+      while(i<=j)cnt+=(unsigned)(H[i++]-a)<=rng;
+      printf("%d\n", cnt);
     }else{
-      int i,h;
-      scanf("%d %d", &i, &h);
-      i++;
-      h++;
-      update(i, H[i], -1);
-      H[i] = h;
-      update(i, H[i], 1);
+      scanf("%d", &i);
+      scanf(" %d", H+i);
     }
   }
 

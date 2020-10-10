@@ -37,7 +37,7 @@ bool visited[MX];
 int m[MX];
 
 //need better solution
-//TODO: ask about this one (p3)
+//better solution in the not -slow version
 
 int main()
 {
