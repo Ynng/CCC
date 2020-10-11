@@ -1,0 +1,1 @@
+{"name":"Local: dmopc20c1p2","url":"f:\\GitHub\\Practice\\Other\\DMOPC\\dmopc20c1p2.cpp","tests":[{"id":1602369383613,"input":"8 3\n6 1 3 2 9 10 2 4 \n4\n1\n1","output":"25\n6\n5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\Other\\DMOPC\\dmopc20c1p2.cpp","group":"local","local":true}
