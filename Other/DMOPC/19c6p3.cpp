@@ -20,16 +20,17 @@ int jump[500005];
 
 
 ll value = 0;
-ll mod = 1e9 + 7;
+ll MOD = 1e9 + 7;
 
 // #define DEBUG
 
-long long powll(long long base, long long exp)
+//power of ll
+ll powll(ll base, ll exp)
 {
-  long long ans = 1;
-  for (base %= mod; exp; exp >>= 1, base = (base * base) % mod)
+  ll ans = 1;
+  for (base %= MOD; exp; exp >>= 1, base = (base * base) % MOD)
     if (exp & 1)
-      ans = (ans * base) % mod;
+      ans = (ans * base) % MOD;
   return ans;
 }
 int main()
@@ -46,7 +47,7 @@ int main()
     number[i] = input[i-1] - '0';
     
     if (number[i])
-      value = (value + powll(2, s-i) % mod + mod) % mod;
+      value = (value + powll(2, s-i) % MOD + MOD) % MOD;
     #ifdef DEBUG
       printf("%d, value: %d\n", number[i], value);
     #endif
@@ -63,7 +64,7 @@ int main()
       if (number[j] == false)
       {
         number[j] = true;
-        value = (value + powll(2, s-j) % mod + mod) % mod;
+        value = (value + powll(2, s-j) % MOD + MOD) % MOD;
         jump[j] = r;
       }
     }
