@@ -32,6 +32,8 @@ const int MOD = 1e9+7, MX = 200000 + 5;
 
 int N, Q;
 ll A[MX];
+//binnary search for the first number smaller than VALUE
+//TODO
 int main()
 {
   scanf("%d %d" , &N, &Q);

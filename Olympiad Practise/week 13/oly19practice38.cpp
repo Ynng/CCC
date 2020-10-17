@@ -98,23 +98,14 @@ int main()
   dfs(1,0);
   build();
 
+  for (int i = 1; i <= mxdepth; i++)
+    psa[i][1] = (psa[i - 1][1] + i) % MOD;
+
   //precalculating power sums
-  for (int j = 1; j <= 50; j++)
-  {
-    if (j == 1)
-    {
-      for (int i = 1; i <= mxdepth; i++)
-        psa[i][j] = (psa[i - 1][j] + i) % MOD;
-      continue;
-    }
+  for (int j = 2; j <= 50; j++)
     for (int i = 1; i <= mxdepth; i++)
-    {
       psa[i][j] = ((psa[i - 1][j] + ((psa[i][j-1] - psa[i-1][j-1]) * (ll)i))%MOD+MOD)%MOD;
       // psa[i][j] = ((psa[i-1][j] + powll(i, j))%MOD+MOD)%MOD;
-    }
-  }
-
-
 
   scanf("%d", &Q);
   for(int i = 1, u, v, k; i <= Q; i++)
