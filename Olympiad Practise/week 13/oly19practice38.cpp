@@ -34,9 +34,12 @@ int N, Q;
 vi G[MX];
 vi etour;
 int head[MX];
-ll psa[MX][50];
+int psa[MX][51];
 bool visited[MX];
-int st[19][2*MX];
+int st[20][3*MX];
+int mxdepth = 0;
+//LCA lowest common ancestors
+
 
 //power of ll
 ll powll(ll base, ll exp)
@@ -49,15 +52,16 @@ ll powll(ll base, ll exp)
 }
 
 void dfs(int i, int d){
+  mxdepth = max(d,mxdepth);
   visited[i]=true;
   head[i]=etour.size();
   etour.push_back(d);
-  printf("%d %d", i, etour[head[i]]);
+  // printf("%d %d", i, etour[head[i]]);
   for(int child : G[i]){
     if(visited[child])continue;
     dfs(child, d+1);
     etour.push_back(d);
-    printf("%d %d", i, etour[head[i]]);
+    // printf("%d %d", i, etour[head[i]]);
   }
 } 
 
@@ -67,24 +71,23 @@ int queryMin(int l, int r){
   return min(st[k][l], st[k][r-(1<<k)+1]);
 }
 
+//building sparse table
+void build(){
+  //initializing sparse table
+  int tourLen = etour.size();
+  int logLen = log2(tourLen);
+  //copying value for sparse table first layer
+  for(int i = 0; i < tourLen; i++)
+    st[0][i]=etour[i];
+  //initializing sparse table
+  for (int k = 1; k <= logLen; k++)
+    for (int i = 0; i <= tourLen - (1 << k); i++)
+      st[k][i] = min(st[k - 1][i], st[k - 1][i + (1 << (k - 1))]);
+}
+
 int main()
 {
   scanf("%d", &N);
-  for (int j = 1; j <= 50; j++)
-  {
-    if (j == 1)
-    {
-      for (int i = 1; i <= MX - 5; i++)
-        psa[i][j] = (psa[i - 1][j] + i) % MOD;
-      continue;
-    }
-    for (int i = 1; i <= MX - 5; i++)
-    {
-      psa[i][j] = (psa[i - 1][j] + (((psa[i][j-1] - psa[i-1][j-1]) * i))%MOD)%MOD;
-      // psa[i][j] = ((psa[i-1][j] + powll(i, j))+MOD)%MOD;
-      while(psa[i][j]<0)psa[i][j]+=MOD;
-    }
-  }
 
   for (int i = 1, u, v; i <= N - 1; i++)
   {
@@ -92,16 +95,26 @@ int main()
     G[u].push_back(v);
     G[v].push_back(u);
   }
-  dfs(1,1);
+  dfs(1,0);
+  build();
 
-  //initializing sparse table
-  int tourLen = etour.size();
-  int logLen = log2(tourLen);
-  for(int i = 1; i <= tourLen; i++)
-    st[0][i]=etour[i-1];
-  for (int k = 1; k <= logLen; k++)
-    for (int i = 1; i <= tourLen - (1 << k) + 1; i++)
-      st[k][i] = min(st[k - 1][i], st[k - 1][i + (1 << (k - 1))]);
+  //precalculating power sums
+  for (int j = 1; j <= 50; j++)
+  {
+    if (j == 1)
+    {
+      for (int i = 1; i <= mxdepth; i++)
+        psa[i][j] = (psa[i - 1][j] + i) % MOD;
+      continue;
+    }
+    for (int i = 1; i <= mxdepth; i++)
+    {
+      psa[i][j] = ((psa[i - 1][j] + ((psa[i][j-1] - psa[i-1][j-1]) * (ll)i))%MOD+MOD)%MOD;
+      // psa[i][j] = ((psa[i-1][j] + powll(i, j))%MOD+MOD)%MOD;
+    }
+  }
+
+
 
   scanf("%d", &Q);
   for(int i = 1, u, v, k; i <= Q; i++)
@@ -109,12 +122,14 @@ int main()
     scanf("%d %d %d", &u, &v, &k);
     int l = min(head[u], head[v]);
     int r = max(head[u], head[v]);
-    // printf("%d", l);
-
-    printf("\n%d %d\n", etour[r]-1, k);
-    printf("\n%lld %lld\n", psa[etour[l]-1][k], psa[etour[r]-1][k]);
-    printf("\n%d %d %d\n", etour[l], etour[r], queryMin(l+1, r+1)-1);
-    printf("%lld\n", ((psa[etour[l]-1][k] + psa[etour[r]-1][k] - psa[queryMin(l+1, r+1)-1][k] - psa[queryMin(l+1, r+1)-2][k])+MOD)%MOD);
+    int dl = etour[l];
+    int dr = etour[r];
+    int dlca = queryMin(l, r);
+    int ans = psa[dl][k] + psa[dr][k] - psa[dlca][k];
+    if(dlca>1)
+      ans-=psa[dlca-1][k];
+    ans = ((ans%MOD)+MOD)%MOD;
+    printf("%d\n", ans);
   }
   return 0;
 }
