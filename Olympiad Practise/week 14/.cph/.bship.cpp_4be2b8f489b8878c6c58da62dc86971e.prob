@@ -1,0 +1,1 @@
+{"name":"Local: bship","url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 14\\bship.cpp","tests":[{"id":1603424093891,"input":"3 4 2\nXX.X\nXX..\n.X..","output":"2"},{"id":1603424622608,"input":"5 10 4","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 14\\bship.cpp","group":"local","local":true}
