@@ -28,7 +28,7 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MX = 10000 + 5;
+const int MX = 100 + 5;
 
 ll MOD = 1000000007;
 
@@ -36,32 +36,58 @@ int C,K,T;
 ll N;
 ll A;
 deque<ll> children;
+
+//matrix
+struct matrix {
+  ll d[MX][MX];
+  matrix(){memset (d,0,sizeof(d));}
+};
+
+//matrix multiplication
+matrix multi(matrix a, matrix b){
+  matrix ans;
+  for (int i = 0; i <= T; i++)
+    for (int k = 0; k <= T; k++)
+      for (int j = 0; j <= T; j++)
+        ans.d[i][j] = (ans.d[i][j] + a.d[i][k]*b.d[k][j])%MOD;
+  return ans;
+}
+
+//matrix power
+matrix quick_pow(matrix x, ll exp){
+  matrix ans;
+  for(int i = 0; i<=T; i++)ans.d[i][i]=1;
+  while(exp>0){
+    if(exp%2!=0)ans = multi(ans,x);
+    x=multi(x,x); exp/=2;
+  }
+  return ans;
+}
+
+//power of ll
+ll powll(ll base, ll exp)
+{
+  ll ans = 1;
+  for (base %= MOD; exp; exp >>= 1, base = (base * base) % MOD)
+    if (exp & 1)
+      ans = (ans * base) % MOD;
+  return ans;
+}
+
 int main()
 {
   scanf("%lld %d %d %d", &N, &K, &T, &C);
-  A = C;
-  children.push_back(0);
-  for (int i = 2; i <= N; i++)
-  {
-    children.push_back((A*K)%MOD);
-    if(children.size()>T){
-      A+=children.front();
-      A%=MOD;
-      children.pop_front();
-    }
-    // printf("A: %lld K:", A);
-    // for(ll j : children){
-    //   printf("%lld ", j);
-    // }
-    // printf("\n");
-  }
-  ll childrenCount = 0;
-  while(!children.empty()){
-    childrenCount+=children.front();
-    children.pop_front();
-  }
-  printf("%lld\n", (childrenCount + A*2)%MOD);
-  // printf("%lld %lld\n", A,childrenCount);
+  matrix x;
+  x.d[0][T]=K;
+  x.d[T][T]=1;
+  for (int i = 1; i <= T; i++)
+    x.d[i][i-1] = 1;
+  x = quick_pow(x,N-1);
+
+  ll ans = 2*C*x.d[T][T]%MOD;
+  for (int i = 0; i < T; i++)
+    ans = (ans + C*x.d[i][T]%MOD)%MOD;
+  printf("%lld", ans);
   
   return 0;
 }
