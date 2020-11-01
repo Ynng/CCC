@@ -1,0 +1,1 @@
+{"name":"Local: ds3","url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 15\\ds3.cpp","tests":[{"id":1604265818046,"input":"5 5\n1 1 4 2 8\nC 2 16\nM 2 4\nG 2 3\nC 2 1\nQ 1 5","output":"2\n4\n2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 15\\ds3.cpp","group":"local","local":true}
