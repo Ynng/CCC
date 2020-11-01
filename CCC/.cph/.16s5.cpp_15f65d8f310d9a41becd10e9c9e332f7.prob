@@ -1,0 +1,1 @@
+{"name":"Local: 16s5","url":"f:\\GitHub\\Practice\\CCC\\16s5.cpp","tests":[{"id":1604188598016,"input":"7 1\n0000001","output":"1000010"},{"id":1604188601891,"input":"5 3\n01011","output":"10100"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\CCC\\16s5.cpp","group":"local","local":true}

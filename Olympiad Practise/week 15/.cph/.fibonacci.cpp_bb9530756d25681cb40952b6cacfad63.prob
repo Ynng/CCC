@@ -1,0 +1,1 @@
+{"name":"Local: fibonacci","url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 15\\fibonacci.cpp","tests":[{"id":1604183830852,"input":"26","output":"121393"},{"id":1604184340322,"input":"1","output":"1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 15\\fibonacci.cpp","group":"local","local":true}

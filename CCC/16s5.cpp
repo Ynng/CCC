@@ -1,18 +1,20 @@
 #include <iostream>
 #include "math.h"
 
+typedef long long ll;
+
 bool circleA[100005];
 bool circleB[100005];
 bool A;
-long long n, t, tempA, tempB, tempC;
+ll n, t;
 
-long long wrap(long long a, long long b){
-  tempA = (a+b)%n;
-  return tempA<0?tempA+n:tempA;
+ll wrap(ll a, ll b){
+  ll temp = (a+b)%n;
+  return temp<0?temp+n:temp;
 }
-void evaluate(long long k){
+void evaluate(ll k){
   // printf("evaled %lld\n", k);
-  for (long long j = 0; j < n; j++)
+  for (ll j = 0; j < n; j++)
   {
     if (A)
       circleB[j] = circleA[wrap(j,k)] ^ circleA[wrap(j,-k)];
@@ -26,20 +28,20 @@ int main()
   scanf("%lld %lld", &n, &t);
   for (int i = 0; i < n; i++)
   {
+    //only read 1 number
     scanf("%1d", &circleA[i]);
   }
   A = true;
-  tempB = (int)(floor(log2(t))+0.5);
-  // std::cout<<"tempB"<<tempB<<std::endl;
-  for(int i = tempB; i>=1 ; i--){
-    tempC = (long long)(floor(pow(2,i))+0.5);
-      // std::cout<<"t " << t <<  " | tempC "<<tempC<<std::endl;
-    if(tempC<=t){
-      t-=tempC;
-      evaluate(tempC);
+
+  ll log2t = log2(t);
+
+  for(int i = log2t; i>=1 ; i--){
+    ll temp = pow(2,i);
+    if(temp<=t){
+      t-=temp;
+      evaluate(temp);
     }
   }
-  // std::cout<<"t " << t << std::endl;
   if(t==1){
     t-=1;
     evaluate(1);
