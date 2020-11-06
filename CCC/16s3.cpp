@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std; 
+
 #include <map>
 #include <vector>
 #include <string.h>
@@ -11,7 +14,7 @@ int n, m, edgeCount, startNode;
 
 int recursion(int cur, int distance)
 {
-    int temp, tempOutput;
+    bool phoChild;
 
     // printf("rec %d\n", cur);
     visited[cur] = true;
@@ -22,38 +25,21 @@ int recursion(int cur, int distance)
         furthestNode = cur;
     }
 
-    if (graph[cur].size() != 1 || distance == 0)
+    if(distance!=0 && graph[cur].size() == 1)
+        return pho[cur];
+
+    phoChild = pho[cur];
+    for (int i = 0; i < graph[cur].size(); i++)
     {
-        if (pho[cur])
-            tempOutput = 0;
-        else
-            tempOutput = -1;
-        for (int i = 0; i < graph[cur].size(); i++)
-        {
-            int neighbor = graph[cur][i];
-            if (!visited[neighbor] && !removed[neighbor])
-            {
-                temp = recursion(neighbor, distance + 1);
-                if (temp == -1)
-                {
-                    removed[neighbor] = true;
-                    edgeCount -= 2;
-                }
-                else
-                {
-                    tempOutput = 0;
-                }
-            }
+        int neighbor = graph[cur][i];
+        if(visited[neighbor] || removed[neighbor]) continue;
+        if (recursion(neighbor, distance + 1)) phoChild = true;
+        else{
+            removed[neighbor] = true;
+            edgeCount -= 2;
         }
-        return tempOutput;
     }
-    else
-    {
-        if (pho[cur])
-            return 0;
-        else
-            return -1;
-    }
+    return phoChild;
 }
 int main()
 {
@@ -74,33 +60,10 @@ int main()
         graph[tempB].push_back(tempA);
     }
 
-    // printf("\n stuff: ");
-
-    // for (int i = 0; i < graph[5].size(); i++)
-    // {
-    //     printf("%d ", graph[5][i]);
-    // }
-
     recursion(startNode, 0);
     memset(visited, 0, sizeof(visited));
-    // printf("edgecount: %d\n", edgeCount);
     recursion(furthestNode, 0);
-    // printf("edgecount: %d\n", edgeCount);
-    // printf("furthestDist: %d\n", furthestDist);
-
-    // printf("%d", edgeCount);
-
-    // printf("\nA:%d B:%d", heightA, heightB);
-
-    // printf("\nedgeCount:%d ", edgeCount);
     printf("%d", edgeCount - furthestDist);
-
-    // printf("\n height ");
-
-    // for (int i = 0; i < n; i++)
-    // {
-    //     printf("\n%d: %d %d %d", i, height[i], removed[i], childCount[i]);
-    // }
 
     return 0;
 }
