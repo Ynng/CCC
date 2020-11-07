@@ -56,6 +56,7 @@ int main()
       int fa = find(a);
       int fb = find(b);
       if(fa!=fb){
+        if(Size[fa] > Size[fb])swap(fa, fb);
         P[fa] = fb;
         Size[fb]+=Size[fa]+1;
         Val[fb]+= Val[fa];
