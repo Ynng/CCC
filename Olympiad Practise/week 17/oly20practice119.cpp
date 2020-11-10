@@ -30,28 +30,32 @@ typedef vector<pl> vpl;
 
 const int MOD = 1000000007, MX = 10000 + 5;
 
-ll x,y,A,B;
+int T;
 
-//lcm
-ll lcm(ll n1, ll n2){
-  ll hcf = n1;
-  ll temp = n2;
-  
-  while(hcf != temp)
-  {
-      if(hcf > temp)
-          hcf -= temp;
-      else
-          temp -= hcf;
-  }
-
-  return (n1 * n2) / hcf;
+//quick power
+ll quickpow(ll base, ll exp)
+{
+  ll ans = 1;
+  for (base %= MOD; exp; exp >>= 1, base = (base * base) % MOD)
+    if (exp & 1)
+      ans = (ans * base) % MOD;
+  return ans;
 }
 
+void solve(){
+  int a1,a2,a3,k;
+  scanf("%d %d %d %d", &a1, &a2, &a3, &k);
+  if(a3-a2==a2-a1)
+    //arithmetic sequence
+    printf("%lld\n",(a1+(a2-a1)*(ll)(k-1))%MOD);
+  else
+    //geometric sequence
+    printf("%lld\n",(a1*quickpow(a2/a1,k-1))%MOD);
+}
 int main()
 {
-  scanf("%lld %lld %lld %lld", &x, &y, &A, &B);
-  printf("%lld\n", (y/A-(x-1)/A)+(y/B-(x-1)/B)-(y/lcm(A,B)-(x-1)/lcm(A,B)));
-  
+  scanf("%d", &T);
+  for(int i = 1; i <= T; i++)
+    solve();
   return 0;
 }

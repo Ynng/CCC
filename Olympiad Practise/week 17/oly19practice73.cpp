@@ -28,30 +28,39 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MOD = 1000000007, MX = 10000 + 5;
+const int MOD = 1000000007, MX = 1000 + 5;
 
-ll x,y,A,B;
-
-//lcm
-ll lcm(ll n1, ll n2){
-  ll hcf = n1;
-  ll temp = n2;
-  
-  while(hcf != temp)
-  {
-      if(hcf > temp)
-          hcf -= temp;
-      else
-          temp -= hcf;
-  }
-
-  return (n1 * n2) / hcf;
-}
-
+int N, W;
+int P[MX], S[MX];
+ll dp[MX][2];
+//weird 0/1 knapsack with large weight
 int main()
 {
-  scanf("%lld %lld %lld %lld", &x, &y, &A, &B);
-  printf("%lld\n", (y/A-(x-1)/A)+(y/B-(x-1)/B)-(y/lcm(A,B)-(x-1)/lcm(A,B)));
+  scanf("%d %d", &N, &W);
+  ms(dp, 1);
+  dp[0][0] = 0;
+  for(int i = 1,w,wc,v=1; i <= N; i++)
+  {
+    scanf("%d %d", P+i, S+i);
+    w = (P[i]+S[i]);
+    wc = P[i]/2+S[i];
+    for(int j = MX; j >= v; j--){
+      dp[j][0]=min(dp[j][0], dp[j-v][0]+w);
+      dp[j][1]=min(dp[j][1], dp[j-v][0]+wc);
+      dp[j][1]=min(dp[j][1], dp[j-v][1]+w);
+    }
+  }
+
+  for(int i = MX-1; i >= 0; i--){
+    if(dp[i][1]<=W){
+      printf("%d\n", i);
+      return 0;
+    }
+    if(dp[i][0]<=W){
+      printf("%d\n", i);
+      return 0;
+    }
+  }
   
   return 0;
 }

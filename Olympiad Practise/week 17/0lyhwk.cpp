@@ -28,30 +28,39 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MOD = 1000000007, MX = 10000 + 5;
+const int MOD = 1000000007, MX = 100 + 5;
 
-ll x,y,A,B;
-
-//lcm
-ll lcm(ll n1, ll n2){
-  ll hcf = n1;
-  ll temp = n2;
-  
-  while(hcf != temp)
-  {
-      if(hcf > temp)
-          hcf -= temp;
-      else
-          temp -= hcf;
-  }
-
-  return (n1 * n2) / hcf;
-}
-
+int N, M, T;
+int W[MX];
+double V[MX];
+double dp[8640+5];
+int alreadySatisfied;
 int main()
 {
-  scanf("%lld %lld %lld %lld", &x, &y, &A, &B);
-  printf("%lld\n", (y/A-(x-1)/A)+(y/B-(x-1)/B)-(y/lcm(A,B)-(x-1)/lcm(A,B)));
+  scanf("%d %d %d", &N , &M, &T);
+  for(int i = 1; i <= N; i++)
+    scanf("%d", W+i);
+  for(int i = 1, A; i <= M; i++){
+    scanf("%d", &A);
+    if(A==0){
+      alreadySatisfied++;
+      continue;
+    }
+    double inc = 1.0/A;
+    for(int j = 1, temp; j <= A; j++)
+    {
+      scanf("%d", &temp);
+      V[temp]+=inc;
+    }
+  }
+
+  for(int i = 1; i <= N; i++){
+    for (int j = T; j >= W[i]; j--)
+      dp[j] = max(dp[j], dp[j-W[i]]+V[i]);
+  }
   
+  //remember max_element returns a pointer, not the value
+  printf("%.2f", *max_element(dp+1, dp+T+1)+alreadySatisfied);  
+
   return 0;
 }

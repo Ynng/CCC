@@ -31,15 +31,37 @@ typedef vector<pl> vpl;
 const int MOD = 1000000007, MX = 200000 + 5;
 
 int N;
-int L[MX];
-int R[MX];
+pi L[MX];
+pi R[MX];
+int smd[MX];//suffix max difference
+int pmd[MX];//prefix max difference
+int ans[MX];
 int main()
 {
   scanf("%d", &N);
-  for (int i = 1; i <= N + 1; i++)
-    scanf("%d", L + i);
-  for (int i = 1; i <= N; i++)
-    scanf("%d", R + i);
+  for (int i = 1, x; i <= N+1; i++){
+    scanf("%d",&x);
+    L[i]={x,i};
+  }
+  for (int i = 1, x; i <= N; i++){
+    scanf("%d", &x);
+    R[i]={x,i};
+  }
+
+  //I hate off by ones
+  sort(L+1, L+N+2);
+  sort(R+1, R+N+1);
+  for(int i = N+1; i >= 2; i--)
+    smd[i] = max(smd[i+1], L[i].f-R[i-1].f);
+  for(int i = 1; i <= N+1; i++)
+  {
+    pmd[i]=max(pmd[i-1], L[i-1].f-R[i-1].f);
+    ans[L[i].s]=max(pmd[i], smd[i+1]);
+  }
+
+  for (int i = 1; i <= N+1; i++)
+    printf("%d ", ans[i]);
+  
 
   return 0;
 }
