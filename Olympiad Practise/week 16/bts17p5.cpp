@@ -66,7 +66,7 @@ int main()
     }
     freq[q[i].s.s] = max(q[i].s.f, freq[q[i].s.s]);
     nope[q[i].s.s]++;
-    dontuse.push_back({pos})
+    dontuse.push_back({pos});
   }
 
   while(pos < N){
