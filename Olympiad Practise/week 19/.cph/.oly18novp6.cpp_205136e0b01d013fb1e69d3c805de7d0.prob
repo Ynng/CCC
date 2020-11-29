@@ -1,0 +1,1 @@
+{"name":"Local: oly18novp6","url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 19\\oly18novp6.cpp","tests":[{"id":1606684211674,"input":"4\n1 100 5 5\n5\n1 1 2\n2 1 2\n1 1 2\n2 2 3\n1 1 4","output":"101\n11\n11"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 19\\oly18novp6.cpp","group":"local","local":true}
