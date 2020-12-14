@@ -28,28 +28,34 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MOD = 1000000007, MX = 100000 + 5;
+const int MOD = 1000000007, MX = 200000 + 5;
 
-int N, M;
-int a[MX];
-//segment tree with pushup function
+int M,N,Q;
+
 struct node{
-  int l,r,max;
-  ll sum;
+  int l,r;
+  ll sum, lz;//lz -> lazy propagation
 }seg[3*MX];
 
 void pushup(int idx){
   int lson = 2*idx, rson = 2*idx+1;
-  seg[idx].max = max(seg[lson].max, seg[rson].max);
   seg[idx].sum = seg[lson].sum + seg[rson].sum;
+}
+
+void pushdown(int idx){
+  int lson = 2*idx, rson = 2*idx+1;
+  seg[lson].lz += seg[idx].lz;
+  seg[rson].lz += seg[idx].lz;
+  seg[lson].sum += seg[idx].lz * (seg[lson].r - seg[lson].l+1);
+  seg[rson].sum += seg[idx].lz * (seg[rson].r - seg[rson].l+1);
+  seg[idx].lz = 0;
 }
 
 void build(int l, int r, int idx){
   seg[idx].l = l; seg[idx].r = r;
   if(l==r){
     int temp;
-    scanf("%d ", &temp);
-    seg[idx].max = temp;
+    scanf("%d", &temp);
     seg[idx].sum = temp;
     return;
   }
@@ -58,24 +64,9 @@ void build(int l, int r, int idx){
   pushup(idx);
 }
 
-//Range update
-//squares and floors between l and r. 
-void updateSquare(int l, int r, int idx){
-  if(seg[idx].max <= 1)return; //This line is specific for this question
-  if(seg[idx].l == seg[idx].r){
-    seg[idx].max = seg[idx].sum = sqrt(seg[idx].sum);return;
-  }
-  int mid = (seg[idx].l+seg[idx].r)/2;
-  if(r<=mid)updateSquare(l,r,2*idx);
-  else if(l>mid) updateSquare(l,r,2*idx+1);
-  else updateSquare(l,mid,2*idx), updateSquare(mid+1, r, 2*idx+1);
-  pushup(idx);
-}
-
 //Updates a single value
 void update (int pos, int val, int idx){
   if(seg[idx].l == seg[idx].r){
-    seg[idx].max = val;
     seg[idx].sum = val;
     return;
   }
@@ -85,40 +76,51 @@ void update (int pos, int val, int idx){
   pushup(idx);
 }
 
-//range minimum query
-int queryMax(int l, int r, int idx){
-  if(seg[idx].l == l && seg[idx].r == r)
-    return seg[idx].max;
-
+//ranged update with lazy propagation
+void updateRange (int l, int r, int val, int idx){
+  if(seg[idx].l == l && seg[idx].r==r){
+    seg[idx].lz += val;
+    seg[idx].sum += (ll)val*(r-l+1);
+    return;
+  }
+  if(seg[idx].lz)pushdown(idx);
   int mid = (seg[idx].l+seg[idx].r)/2;
-  if(r<=mid) return queryMax(l,r,2*idx);
-  else if(l>mid) return queryMax(l,r,2*idx+1);
-  else return max(queryMax(l,mid,2*idx), queryMax(mid+1,r,2*idx+1));
+
+  if(r<=mid) updateRange(l,r,val,2*idx);
+  else if(l>mid) updateRange(l,r,val,2*idx+1);
+  else{
+    updateRange(l,mid,val,2*idx);
+    updateRange(mid+1,r,val,2*idx+1);
+  }
+  pushup(idx);
 }
 
 ll querySum(int l, int r, int idx){
   if(seg[idx].l == l && seg[idx].r == r)
     return seg[idx].sum;
-
+  if(seg[idx].lz)pushdown(idx);
   int mid = (seg[idx].l+seg[idx].r)/2;
   if(r<=mid) return querySum(l,r,2*idx);
   else if(l>mid) return querySum(l,r,2*idx+1);
   else return querySum(l,mid,2*idx) + querySum(mid+1,r,2*idx+1);
 }
 
-
-
 int main()
 {
-  scanf("%d", &N);
+  scanf("%d %d %d", &M, &N, &Q);
   build(1,N,1);
-  scanf("%d", &M);
-  for(int i = 1, op, l, r; i <= M; i++)
+  for(int i = 1, op, l,r,x; i <= Q; i++)
   {
-    scanf("%d %d %d", &op, &l, &r);
-    if(op==1)printf("%lld\n", querySum(l,r,1));
-    else updateSquare(l,r,1);
+    scanf("%d", &op);
+    if(op==1){
+      scanf("%d %d %d", &l, &r, &x);
+      updateRange(l, r, x, 1);
+    }else if(op==2){
+      scanf("%d %d", &l, &r);
+      printf("%lld\n", querySum(l, r, 1)%M);
+    }
   }
+  
   
   return 0;
 }

@@ -1,0 +1,1 @@
+{"name":"Local: dmopc15c1p6","url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 20\\dmopc15c1p6.cpp","tests":[{"id":1607289719389,"input":"2 5 3\n1 2 3 4 5\n2 1 4\n1 2 5 7\n2 1 5","output":"0\n1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 20\\dmopc15c1p6.cpp","group":"local","local":true}
