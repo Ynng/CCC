@@ -48,13 +48,6 @@ int main()
   for (int i = 1; i <= T + 1; i++)
     C[i] += C[i - 1] + B[i];
 
-  // psum(A);
-  // psum(A);
-  // psum(A);
-  // psum(B);
-  // psum(B);
-  // psum(C);
-
   for (int i = 1; i <= T; i++)
     printf("%lld ", C[i]);
 
