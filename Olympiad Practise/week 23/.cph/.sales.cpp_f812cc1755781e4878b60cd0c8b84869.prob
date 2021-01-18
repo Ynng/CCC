@@ -1,0 +1,1 @@
+{"name":"Local: sales","url":"f:\\GitHub\\Practice\\Olympiad Practise\\week 23\\sales.cpp","tests":[{"id":1610917832989,"input":"5 5 3\n9 6\n1 5\n2 3\n3 11\n2 7\n1 1 1 4\n4 6 3 5\n4 1 1 4","output":"22\n10\n25"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\Olympiad Practise\\week 23\\sales.cpp","group":"local","local":true}
