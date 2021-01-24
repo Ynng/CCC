@@ -1,0 +1,1 @@
+{"name":"Local: wac6p3","url":"f:\\GitHub\\Practice\\WAC\\wac6p3.cpp","tests":[{"id":1611444920629,"input":"8\n1 4 4 2 7 14 12 10","output":"2"},{"id":1611444924217,"input":"11\n4 2 4 7 1 24 26 8 16 31 30","output":"8"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\WAC\\wac6p3.cpp","group":"local","local":true}
