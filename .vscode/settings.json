@@ -103,6 +103,7 @@
     "python.pythonPath": "C:\\Users\\wenqi\\miniconda3\\python.exe",
     "python.linting.flake8Enabled": false,
     "competitive-programming-helper.firstTime": false,
+    "peacock.color": "#007fff",
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#3399ff",
         "activityBar.activeBorder": "#bf0060",
@@ -119,5 +120,4 @@
         "titleBar.inactiveBackground": "#007fff99",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#007fff",
 }

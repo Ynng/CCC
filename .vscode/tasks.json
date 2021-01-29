@@ -49,5 +49,15 @@
         }
       }
     },
+    {
+      "type": "shell",
+      "label": "build file - Linux",
+      "command": "/usr/bin/g++",
+      "args": ["-g", "${file}", "-o", "${fileDirname}/${fileBasenameNoExtension}"],
+      "options": {
+        "cwd": "/usr/bin"
+      },
+      "problemMatcher": ["$gcc"],
+    }
   ]
 }
