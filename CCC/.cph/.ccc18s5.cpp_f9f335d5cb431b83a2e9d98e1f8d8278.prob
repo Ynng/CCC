@@ -1,0 +1,1 @@
+{"name":"Local: ccc18s5","url":"f:\\GitHub\\Practice\\CCC\\ccc18s5.cpp","tests":[{"id":1612643370314,"input":"2 3 4 1\n2 3 5\n3 2 7\n1 2 6\n1 1 8\n2 1 5","output":"41"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\CCC\\ccc18s5.cpp","group":"local","local":true}
