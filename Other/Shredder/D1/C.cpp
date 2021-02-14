@@ -8,5 +8,5 @@ int main()
   // invocation of ::isPositive not shown
   int t;
   scanf("%d", &t);
-  printf("%d", isPositive((int*)123));
+  printf("%d", isPositive(&t));
 }

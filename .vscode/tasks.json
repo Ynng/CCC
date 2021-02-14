@@ -25,8 +25,9 @@
         "-D_GLIBCXX_DEBUG",
         "-D_GLIBCXX_DEBUG_PEDANTIC",
         "-D_FORTIFY_SOURCE=2",
-        // "-fsanitize=undefined",
-        "-fno-sanitize-recover",
+        "-fsanitize=undefined",
+        "-fsanitize-undefined-trap-on-error",
+        "-fno-sanitize-recover"
         // "-fstack-protector"
       ],
       "group": {
@@ -35,10 +36,7 @@
       },
       "problemMatcher": {
         "owner": "cpp",
-        "fileLocation": [
-          "relative",
-          "${workspaceFolder}"
-        ],
+        "fileLocation": ["relative", "${workspaceFolder}"],
         "pattern": {
           "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
           "file": 1,
@@ -53,11 +51,37 @@
       "type": "shell",
       "label": "build file - Linux",
       "command": "/usr/bin/g++",
-      "args": ["-g", "${file}", "-o", "${fileDirname}/${fileBasenameNoExtension}"],
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}",
+        "-Wall",
+        "-Wextra",
+        "-pedantic",
+        "-std=c++14",
+        "-O2",
+        "-Wshadow",
+        "-Wformat=2",
+        "-Wfloat-equal",
+        "-Wconversion",
+        "-Wlogical-op",
+        "-Wshift-overflow=2",
+        "-Wduplicated-cond",
+        "-Wcast-qual",
+        "-Wcast-align",
+        "-D_GLIBCXX_DEBUG",
+        "-D_GLIBCXX_DEBUG_PEDANTIC",
+        "-D_FORTIFY_SOURCE=2",
+        "-fsanitize=address",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover",
+        "-fstack-protector",
+      ],
       "options": {
         "cwd": "/usr/bin"
       },
-      "problemMatcher": ["$gcc"],
+      "problemMatcher": ["$gcc"]
     }
   ]
 }
