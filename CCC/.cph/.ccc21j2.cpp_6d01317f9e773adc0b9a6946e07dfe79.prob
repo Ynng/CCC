@@ -1,0 +1,1 @@
+{"name":"Local: ccc21j2","url":"f:\\GitHub\\Practice\\CCC\\ccc21j2.cpp","tests":[{"id":1614108045795,"input":"3\nAhmed\n300\nSuzanne\n500\nIvona\n450","output":"Suzanne"},{"id":1614108051944,"input":"2\nIjeoma\n20\nGoor\n20","output":"Ijeoma"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\CCC\\ccc21j2.cpp","group":"local","local":true}
