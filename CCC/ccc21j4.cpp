@@ -28,7 +28,7 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MOD = 1000000007, MX = 100000 + 5;
+const int MOD = 1000000007, MX = 500000 + 5;
 
 char str[MX];
 int len;
