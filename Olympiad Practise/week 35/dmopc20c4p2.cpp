@@ -30,38 +30,37 @@ typedef vector<pl> vpl;
 
 const int MOD = 1000000007, MX = 10000 + 5;
 
-int variables;
-pair<char, int> bag[] = {
-    {'g', 1},
-    {'g', 2},
-    {'g', 3},
-    {'r', 4},
-    {'r', 5},
-    {'r', 6},
-    {'r', 7}};
+ll N, M, K;
+ll a,b;
+unordered_map<ll, bool> row, col;
 int main()
 {
-  sort(bag, bag + 7);
-  int i = 0, c = 0;;
-  do
+  scanf("%lld %lld %lld", &N, &M, &K);
+  for (int i = 1; i <= K; i++)
   {
-    i++;
+    scanf("%lld %lld", &a, &b);
+    row[a] ^= 1;
+    col[b] ^= 1;
+  }
+  vl vr, vc;
 
-    int g = 0, r = 0;
-    for (int i = 0; i < 7; i++)
-    {
-      printf("%c", bag[i].f);
-      if(bag[i].f=='g')g++;
-      if(bag[i].f=='r')r++;
-      if(g==2||r==2){
-        if(g>=1&&r>=1)c++;
-        break;
-      }
-    }
-    printf("\n");
-  } while (next_permutation(bag, bag + 7));
+  for (auto e : row)
+    if (e.second)
+      vr.pb(e.first);
+  for (auto e : col)
+    if (e.second)
+      vc.pb(e.first);
 
-  printf("%d\n", c);
-  printf("%d\n", i);
+  int ans = max(vr.size(), vc.size()), sz = min(vr.size(), vc.size());
+  printf("%d\n", ans);
+
+  for (int i = 0; i < sz; i++)
+    printf("%lld %lld\n", vr[i], vc[i]);
+
+  for (size_t i = sz; i < vr.size(); i++)
+    printf("%lld %d\n", vr[i], 1);
+
+  for (size_t i = sz; i < vc.size(); i++)
+    printf("%d %lld\n", 1, vc[i]);
   return 0;
 }

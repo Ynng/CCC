@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std; 
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double ld;
@@ -31,37 +31,10 @@ typedef vector<pl> vpl;
 const int MOD = 1000000007, MX = 10000 + 5;
 
 int variables;
-pair<char, int> bag[] = {
-    {'g', 1},
-    {'g', 2},
-    {'g', 3},
-    {'r', 4},
-    {'r', 5},
-    {'r', 6},
-    {'r', 7}};
 int main()
 {
-  sort(bag, bag + 7);
-  int i = 0, c = 0;;
-  do
-  {
-    i++;
-
-    int g = 0, r = 0;
-    for (int i = 0; i < 7; i++)
-    {
-      printf("%c", bag[i].f);
-      if(bag[i].f=='g')g++;
-      if(bag[i].f=='r')r++;
-      if(g==2||r==2){
-        if(g>=1&&r>=1)c++;
-        break;
-      }
-    }
-    printf("\n");
-  } while (next_permutation(bag, bag + 7));
-
-  printf("%d\n", c);
-  printf("%d\n", i);
+  
+  
+  
   return 0;
 }

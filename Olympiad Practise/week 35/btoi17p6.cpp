@@ -28,40 +28,45 @@ typedef vector<pl> vpl;
 #define all(x) x.begin(), x.end()
 #define ins insert
 
-const int MOD = 1000000007, MX = 10000 + 5;
+const int MOD = 1000000007, MX = 2e5 + 5;
 
-int variables;
-pair<char, int> bag[] = {
-    {'g', 1},
-    {'g', 2},
-    {'g', 3},
-    {'r', 4},
-    {'r', 5},
-    {'r', 6},
-    {'r', 7}};
+int N, D, dis[MX], ans;
+vi adj[MX];
+
+void dfs(int u, int pa)
+{
+  deque<int> q;
+  for (int v : adj[u])
+  {
+    if (v == pa)
+      continue;
+    dfs(v, u);
+    q.pb(dis[v] + 1);
+  }
+  sort(q.begin(), q.end());
+  while(q.size()>=2 && q[0] + q[1] < D){
+    ans--;
+    q.pop_front();
+  }
+  if(q.empty())dis[u] = 0;
+  else dis[u] = q[0] % D;
+  if(dis[u]==0)ans++;
+}
+
 int main()
 {
-  sort(bag, bag + 7);
-  int i = 0, c = 0;;
-  do
+  scanf("%d %d", &N, &D);
+
+  for (int i = 1, pa; i < N; i++)
   {
-    i++;
+    scanf("%d", &pa);
+    adj[pa].pb(i);
+    adj[i].pb(pa);
+  }
 
-    int g = 0, r = 0;
-    for (int i = 0; i < 7; i++)
-    {
-      printf("%c", bag[i].f);
-      if(bag[i].f=='g')g++;
-      if(bag[i].f=='r')r++;
-      if(g==2||r==2){
-        if(g>=1&&r>=1)c++;
-        break;
-      }
-    }
-    printf("\n");
-  } while (next_permutation(bag, bag + 7));
+  dfs(0, -1);
 
-  printf("%d\n", c);
-  printf("%d\n", i);
+  printf("%d", ans);
+
   return 0;
 }
