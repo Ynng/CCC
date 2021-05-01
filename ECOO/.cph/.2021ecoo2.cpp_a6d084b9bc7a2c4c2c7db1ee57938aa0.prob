@@ -1,0 +1,1 @@
+{"name":"Local: 2021ecoo2","url":"f:\\GitHub\\Practice\\ECOO\\2021ecoo2.cpp","tests":[{"id":1619881979083,"input":"ACTGAGCA","output":"AC T GAG CA"},{"id":1619881986080,"input":"AAAAGCGCTA","output":"A A A AG C G C TA"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"f:\\GitHub\\Practice\\ECOO\\2021ecoo2.cpp","group":"local","local":true}
